@@ -21,6 +21,29 @@ connection.connect();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Split the given string id into color codes, then return them as an array
+function extract_colors_from(id) {
+    let paletteID = id;
+    let color0 = paletteID.substr(0,  6);
+    let color1 = paletteID.substr(6,  6);
+    let color2 = paletteID.substr(12, 6);
+    let color3 = paletteID.substr(18, 6);
+    let color4 = paletteID.substr(24, 6);
+
+    return [color0, color1, color2, color3, color4];
+}
+
+// GET a color palette by id
+app.get("/palette/:id", (req, res) => {
+    let colors = extract_colors_from(req.params.id);
+
+    connection.query(`SELECT * FROM color_palette WHERE color0='${colors[0]}' AND color1='${colors[1]}' AND color2='${colors[2]}' AND color3='${colors[3]}' AND color4='${colors[4]}'`,
+        (err, rows) => {
+            if (err) throw err;
+            res.send({ palette: rows[0] });
+        });
+});
+
 app.get("/", (req, res) => {
     res.send("Color Palettes");
 });
