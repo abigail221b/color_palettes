@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import './App.css';
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
                 <Link to="liked_palettes">Liked Palettes</Link>
                 <Link to="create">Create</Link>
             </nav>
+            <Outlet />
         </div>
     );
 }
