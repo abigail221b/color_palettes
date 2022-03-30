@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Create from "./pages/Create";
-import Popular from "./pages/Popular";
-import New from "./pages/New";
-import Random from "./pages/Random";
-import Liked from "./pages/Liked";
+import Create from "./routes/Create";
+import Popular from "./routes/Popular";
+import New from "./routes/New";
+import Random from "./routes/Random";
+import Liked from "./routes/Liked";
 
 ReactDOM.render(
     <React.StrictMode>
