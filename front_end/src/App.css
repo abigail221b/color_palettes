@@ -4,24 +4,6 @@ nav {
     position: relative;
 }
 
-.colors_input {
-    width: 500px;
-}
-
-input[type="color"] {
-    height: 300px;
-    border: none;
-}
-
-.create_button {
-    background-color: #85144b;
-}
-
-.wrapper {
-    display: flex;
-    justify-content: center;
-}
-
 .brand {
     color: black;
 }
