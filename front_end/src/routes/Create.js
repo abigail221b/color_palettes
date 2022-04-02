@@ -11,6 +11,18 @@ function Create() {
         setColors(newColors);
     }
 
+    function handleSubmit(e) {
+        fetch("/palette/create", {
+            method: "POST",
+            body: JSON.stringify({ colors: colors }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(res => res.json())
+        .then(res => console.log(res));
+    }
+
     return (
         <div className="Create">
             <h1>Create a new color palette: </h1>
