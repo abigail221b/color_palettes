@@ -55,6 +55,18 @@ app.post("/palette/create", (req, res) => {
         });
 });
 
+// GET new color palettes (15 palettes at a time)
+app.get("/palettes/new/:page", (req, res) => {
+    let num_palettes = 15;
+    let page = req.params.page;
+    let offset = page * num_palettes;
+    connection.query(`SELECT * FROM color_palette ORDER BY date_created DESC LIMIT ${offset},${num_palettes}`,
+        (err, rows) => {
+            if (err) throw err;
+            res.send(rows);
+        });
+});
+  
 // GET popular color palettes (15 palettes at a time)
 //  - of all time
 //  - this year
