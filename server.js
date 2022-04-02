@@ -66,6 +66,43 @@ app.get("/palettes/new/:page", (req, res) => {
             res.send(rows);
         });
 });
+  
+// GET popular color palettes (15 palettes at a time)
+//  - of all time
+//  - this year
+//  - this month
+//  - this week
+const TIME_FILTER = {
+    ALL_TIME: "all_time",
+    THIS_YEAR: "this_year",
+    THIS_MONTH: "this_month",
+    THIS_WEEK: "this_week"
+};
+app.get("/palettes/popular/:time_filter/:page", (req, res) => {
+    let time_filter = req.params.time_filter;
+    let page = req.params.page;
+    let num_palettes = 15;
+    let offset = page * num_palettes;
+    let query = "";
+
+    switch(time_filter) {
+        case TIME_FILTER.THIS_YEAR:
+            query = `SELECT * FROM color_palette WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) ORDER BY num_likes DESC LIMIT ${offset},${num_palettes};`;
+            break;
+        case TIME_FILTER.THIS_MONTH:
+            query = `SELECT * FROM color_palette WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) AND MONTH(date_created) = MONTH(CURRENT_DATE()) ORDER BY num_likes DESC LIMIT ${offset},${num_palettes};`;
+            break;
+        case TIME_FILTER.THIS_WEEK:
+            query = `SELECT * FROM color_palette WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) AND MONTH(date_created) = MONTH(CURRENT_DATE()) AND WEEK(date_created) = WEEK(CURRENT_DATE()) ORDER BY num_likes DESC LIMIT ${offset},${num_palettes};`;
+            break;
+        default:
+            query = `SELECT * FROM color_palette  ORDER BY num_likes DESC LIMIT ${offset},${num_palettes};`;
+    }
+    connection.query(query, (err, rows) => {
+        if (err) throw err;
+        res.send(rows);
+    });
+});
 
 app.get("/", (req, res) => {
     res.send("Color Palettes");
