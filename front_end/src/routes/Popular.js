@@ -36,7 +36,7 @@ function Popular() {
     }, [filter, page]);
 
     return (
-        <div className="Popular">
+        <div className="Popular" style={{  maxWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Popular Palettes</h1>
             <select name="filer" onChange={ handleChange }>
                 <option value={ TIME_FILTER.ALL_TIME }>All Time</option>

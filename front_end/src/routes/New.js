@@ -15,7 +15,7 @@ function New() {
     }, [page])
 
     return (
-        <div className="New">
+        <div className="New" style={{ maxWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>New Color Palettes</h1>
             { palettes.map(palette =>
                 <div className="ColorPalette">
