@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ColorPalette from "../components/ColorPalette.js";
 
 function New() {
 
@@ -17,17 +18,10 @@ function New() {
     return (
         <div className="New" style={{ maxWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>New Color Palettes</h1>
-            { palettes.map(palette =>
-                <div className="ColorPalette">
-                    <span>{ palette.color0 }</span>
-                    <span>{ palette.color1 }</span>
-                    <span>{ palette.color2 }</span>
-                    <span>{ palette.color3 }</span>
-                    <span>{ palette.color4 }</span>
-                    <span>{ palette.date_created }</span>
-                    <span>{ palette.num_likes }</span>
-                </div>)
-            }
+            {palettes.map(palette => <ColorPalette
+                                        colors={[palette.color0, palette.color1, palette.color2, palette.color3, palette.color4]}
+                                        date_created = { palette.date_created}
+                                        num_likes = { palette.num_likes }/> )}
         </div>
     );
 }
