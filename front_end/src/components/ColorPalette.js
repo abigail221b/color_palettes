@@ -23,7 +23,9 @@ function ColorPalette({ colors, date_created, num_likes}) {
     const paletteInfo_style = {
         width: "100%",
         height: "50px",
-        display: "flex"
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
     };
 
     return (
