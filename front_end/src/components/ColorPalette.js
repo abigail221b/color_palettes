@@ -28,6 +28,11 @@ function ColorPalette({ colors, date_created, num_likes}) {
         alignItems: "center"
     };
 
+    const likesButton_style = {
+        color: "#3A3845",
+        backgroundColor: "pink"
+    };
+
     return (
         <div className="ColorPalette" style={ colorPalette_style }>
             <div className="colorView" style={ colorView_style }>
@@ -35,7 +40,7 @@ function ColorPalette({ colors, date_created, num_likes}) {
             </div>
             <div className="info" style={ paletteInfo_style }>
                 <div>{ date_created }</div>
-                <div>{ num_likes }</div>
+                <button style={ likesButton_style }>&#9829; { num_likes }</button>
             </div>
         </div>
     );
