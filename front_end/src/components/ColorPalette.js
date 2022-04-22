@@ -2,7 +2,6 @@
 function ColorPalette({ colors, date_created, num_likes}) {
 
     const colorPalette_style = {
-        minWidth: "275px",
         height: "225px",
         padding: 0,
         display: "flex",
