@@ -1,5 +1,9 @@
 @import "../node_modules/picnic/picnic.min.css";
 
+body, a, button {
+    color: #373c44;
+}
+
 nav {
     position: relative;
 }
