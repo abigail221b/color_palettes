@@ -32,13 +32,43 @@ function ColorPalette({ colors, date_created, num_likes}) {
         backgroundColor: "pink"
     };
 
+    const formatDate = (date) => {
+        const dateObj = new Date(date);
+        let year = dateObj.getFullYear();
+        let month = dateObj.getMonth();
+        let day = dateObj.getDay();
+        let hour = dateObj.getHours();
+        let minute = dateObj.getMinutes();
+        let second = dateObj.getSeconds();
+
+        const now = new Date();
+        let yearNow = now.getFullYear();
+        let monthNow = now.getMonth();
+        let dayNow = now.getDay();
+        let hourNow = now.getHours();
+        let minuteNow = now.getMinutes();
+        let secondNow = now.getSeconds();
+
+        if(yearNow - year == 0)
+            if(monthNow - month == 0)
+                if(dayNow - day == 0)
+                    if(hourNow - hour == 0)
+                        if(minuteNow - minute == 0)
+                            return "now";
+                        else return `${ minuteNow - minute } ${ minuteNow - minute === 1? "minute" : "minutes"} ago`;
+                    else return `${ hourNow - hour } ${ hourNow - hour === 1? "hour" : "hours"} ago`;
+                else return `${ dayNow - day } ${ dayNow - day === 1? "day" : "days"} ago`;
+            else return `${ monthNow - month } ${ monthNow - month === 1? "month" : "months"} ago`;
+        else return `${ yearNow - year } ${ yearNow - year === 1? "year" : "years"} ago`;
+    }
+
     return (
         <div className="ColorPalette" style={ colorPalette_style }>
             <div className="colorView" style={ colorView_style }>
                 { colors.map(color => <div style={{ ...colorBlock_style, backgroundColor:`#${color}` }}></div>) }
             </div>
             <div className="info" style={ paletteInfo_style }>
-                <div>{ date_created }</div>
+                <div>{ formatDate(date_created) }</div>
                 <button style={ likesButton_style }>&#9829; { num_likes }</button>
             </div>
         </div>
