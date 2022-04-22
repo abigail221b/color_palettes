@@ -29,7 +29,6 @@ function ColorPalette({ colors, date_created, num_likes}) {
     };
 
     const likesButton_style = {
-        color: "#3A3845",
         backgroundColor: "pink"
     };
 
