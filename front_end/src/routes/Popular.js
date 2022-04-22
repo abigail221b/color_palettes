@@ -39,7 +39,7 @@ function Popular() {
     return (
         <div className="Popular" style={{  maxWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Popular Palettes</h1>
-            <select name="filer" onChange={ handleChange }>
+            <select name="filer" onChange={ handleChange } style={{ width: "200px" }}>
                 <option value={ TIME_FILTER.ALL_TIME }>All Time</option>
                 <option value={ TIME_FILTER.THIS_YEAR }>This Year</option>
                 <option value={ TIME_FILTER.THIS_MONTH }>This Month</option>
