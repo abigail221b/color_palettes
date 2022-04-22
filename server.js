@@ -48,7 +48,7 @@ app.get("/palette/:id", (req, res) => {
 app.post("/palette/create", (req, res) => {
     let colors = req.body.colors.map(color => color.replace("#", ""));
     connection.query(`INSERT INTO color_palette (color0, color1, color2, color3, color4, date_created, num_likes)
-                      VALUES ('${colors[0]}', '${colors[1]}', '${colors[2]}', '${colors[3]}', '${colors[4]}', CURRENT_DATE(), 0)`,
+                      VALUES ('${colors[0]}', '${colors[1]}', '${colors[2]}', '${colors[3]}', '${colors[4]}', CURRENT_TIMESTAMP(), 0)`,
         (err, rows) => {
             if (err) throw err;
             res.send(rows);
