@@ -27,6 +27,7 @@ function Create() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        alignItems: "center",
         marginLeft: "auto",
         marginRight: "auto",
         maxWidth: "500px"
@@ -37,9 +38,13 @@ function Create() {
         border: "none"
     };
 
+    const createButton_style = {
+        width: "100%"
+    };
+
     return (
         <div className="Create" style={ create_form_style }>
-            <h1>Create a new color palette: </h1>
+            <h1>Create a new color palette </h1>
             <div className="colors_input flex five">
                 <span><input type="color" value={ colors[0] } onChange={ (e) => handleColorChange(e, 0) } style={ color_input_style } /></span>
                 <span><input type="color" value={ colors[1] } onChange={ (e) => handleColorChange(e, 1) } style={ color_input_style } /></span>
@@ -47,7 +52,7 @@ function Create() {
                 <span><input type="color" value={ colors[3] } onChange={ (e) => handleColorChange(e, 3) } style={ color_input_style } /></span>
                 <span><input type="color" value={ colors[4] } onChange={ (e) => handleColorChange(e, 4) } style={ color_input_style } /></span>
             </div>
-            <button onClick={ handleSubmit }>Create</button>
+            <button style={ createButton_style } onClick={ handleSubmit }>Create</button>
         </div>
     );
 }
