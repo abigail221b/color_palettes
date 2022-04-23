@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function Create() {
-    const [colors, setColors] = useState(["#000000", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#000000"]);
+    const [colors, setColors] = useState(["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]);
 
     function handleColorChange(e, id) {
         let newColors = colors.map( (color, index) => {
