@@ -33,24 +33,34 @@ function Create() {
         maxWidth: "500px"
     };
 
-    const color_input_style = {
+    const colorsInput_style = {
+        width: "100%",
+        display: "grid",
+        gridTemplateColumns: "repeat(5, auto)"
+    };
+
+    const colorInput_style = {
         height: "300px",
-        border: "none"
+        width: "100%",
+        border: "1px solid black"
     };
 
     const createButton_style = {
-        width: "100%"
+        width: "100%",
+        height: "55px",
+        backgroundColor: "yellow",
+        marginTop: "15px"
     };
 
     return (
         <div className="Create" style={ create_form_style }>
             <h1>Create a new color palette </h1>
-            <div className="colors_input flex five">
-                <span><input type="color" value={ colors[0] } onChange={ (e) => handleColorChange(e, 0) } style={ color_input_style } /></span>
-                <span><input type="color" value={ colors[1] } onChange={ (e) => handleColorChange(e, 1) } style={ color_input_style } /></span>
-                <span><input type="color" value={ colors[2] } onChange={ (e) => handleColorChange(e, 2) } style={ color_input_style } /></span>
-                <span><input type="color" value={ colors[3] } onChange={ (e) => handleColorChange(e, 3) } style={ color_input_style } /></span>
-                <span><input type="color" value={ colors[4] } onChange={ (e) => handleColorChange(e, 4) } style={ color_input_style } /></span>
+            <div style={colorsInput_style}>
+                <label style={{...colorInput_style, ...{ backgroundColor: colors[0]} }}><input type="color" onChange={ (e) => handleColorChange(e, 0) } style={{ display: "none" }} /></label>
+                <label style={{...colorInput_style, ...{ backgroundColor: colors[1]} }}><input type="color" onChange={ (e) => handleColorChange(e, 1) } style={{ display: "none" }} /></label>
+                <label style={{...colorInput_style, ...{ backgroundColor: colors[2]} }}><input type="color" onChange={ (e) => handleColorChange(e, 2) } style={{ display: "none" }} /></label>
+                <label style={{...colorInput_style, ...{ backgroundColor: colors[3]} }}><input type="color" onChange={ (e) => handleColorChange(e, 3) } style={{ display: "none" }} /></label>
+                <label style={{...colorInput_style, ...{ backgroundColor: colors[4]} }}><input type="color" onChange={ (e) => handleColorChange(e, 4) } style={{ display: "none" }} /></label>
             </div>
             <button style={ createButton_style } onClick={ handleSubmit }>Create</button>
         </div>
