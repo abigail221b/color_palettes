@@ -29,8 +29,7 @@ function Create() {
         justifyContent: "center",
         marginLeft: "auto",
         marginRight: "auto",
-        maxWidth: "500px",
-        border: "1px solid black"
+        maxWidth: "500px"
     };
 
     const color_input_style = {
