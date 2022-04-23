@@ -78,7 +78,7 @@ function ColorPalette({ colors, date_created, num_likes}) {
             </div>
             <div className="info" style={ paletteInfo_style }>
                 <div>{ formatDate(date_created) }</div>
-                <button style={{ backgroundColor: liked? "pink" : "white" }} onClick={ handleLike }>&#9829; { numLikes }</button>
+                <button style={{ backgroundColor: liked? "pink" : "white", border: "2px solid pink" }} onClick={ handleLike }>&#9829; { numLikes }</button>
             </div>
         </div>
     );
