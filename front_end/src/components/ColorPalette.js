@@ -1,5 +1,9 @@
+import { useState } from "react";
 
 function ColorPalette({ colors, date_created, num_likes}) {
+
+    const [liked, setLiked] = useState(false);
+    const [numLikes, setNumLikes] = useState(num_likes);
 
     const colorPalette_style = {
         height: "225px",
@@ -26,10 +30,6 @@ function ColorPalette({ colors, date_created, num_likes}) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
-    };
-
-    const likesButton_style = {
-        backgroundColor: "pink"
     };
 
     const formatDate = (date) => {
@@ -62,6 +62,15 @@ function ColorPalette({ colors, date_created, num_likes}) {
         else return `${ yearNow - year } ${ yearNow - year === 1? "year" : "years"} ago`;
     }
 
+    const handleLike = () => {
+        if(liked) {
+            setNumLikes(numLikes => numLikes-1);
+        } else {
+            setNumLikes(numLikes => numLikes+1);
+        }
+        setLiked(!liked);
+    }
+
     return (
         <div className="ColorPalette" style={ colorPalette_style }>
             <div className="colorView" style={ colorView_style }>
@@ -69,7 +78,7 @@ function ColorPalette({ colors, date_created, num_likes}) {
             </div>
             <div className="info" style={ paletteInfo_style }>
                 <div>{ formatDate(date_created) }</div>
-                <button style={ likesButton_style }>&#9829; { num_likes }</button>
+                <button style={{ backgroundColor: liked? "pink" : "white" }} onClick={ handleLike }>&#9829; { numLikes }</button>
             </div>
         </div>
     );
