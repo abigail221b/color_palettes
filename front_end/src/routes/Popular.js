@@ -46,10 +46,10 @@ function Popular() {
                 <option value={ TIME_FILTER.THIS_WEEK }>This Week</option>
             </select>
             <div className="flex one two-500 three-800">
-                {palettes.map(palette => <ColorPalette
+                {palettes.map(palette => <div><ColorPalette
                                             colors={[palette.color0, palette.color1, palette.color2, palette.color3, palette.color4]}
                                             date_created = { palette.date_created}
-                                            num_likes = { palette.num_likes }/> )}
+                                            num_likes = { palette.num_likes }/></div> )}
             </div>
         </div>
     );
