@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ColorPalette({ colors, date_created, num_likes}) {
 
@@ -26,10 +26,11 @@ function ColorPalette({ colors, date_created, num_likes}) {
 
     const paletteInfo_style = {
         width: "100%",
-        height: "50px",
+        height: "70px",
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        padding: "0 10px"
     };
 
     const formatDate = (date) => {
@@ -70,6 +71,28 @@ function ColorPalette({ colors, date_created, num_likes}) {
         }
         setLiked(!liked);
     }
+
+    useEffect(() => {
+        if(liked) {
+            if(!localStorage.getItem("palettes")) {
+                localStorage.setItem("palettes", JSON.stringify([]));
+            }
+            let saved = localStorage.getItem("palettes");
+            let liked_palettes = JSON.parse(saved);
+            let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+            liked_palettes = [...liked_palettes, thisPaletteID];
+            localStorage.setItem("palettes", JSON.stringify(liked_palettes));
+        } else {
+            if(!localStorage.getItem("palettes")) {
+                localStorage.setItem("palettes", JSON.stringify([]));
+            }
+            let saved = localStorage.getItem("palettes");
+            let liked_palettes = JSON.parse(saved);
+            let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+            liked_palettes = liked_palettes.filter(paletteID => paletteID !== thisPaletteID);
+            localStorage.setItem("palettes", JSON.stringify(liked_palettes));
+        }
+    }, [liked]);
 
     return (
         <div className="ColorPalette" style={ colorPalette_style }>
