@@ -9,7 +9,8 @@ function ColorPalette({ colors, date_created, num_likes}) {
         height: "225px",
         padding: 0,
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        boxShadow: "0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2) "
     };
 
     const colorView_style = {
