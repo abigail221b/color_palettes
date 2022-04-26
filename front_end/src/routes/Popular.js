@@ -37,7 +37,7 @@ function Popular() {
     }, [filter, page]);
 
     return (
-        <div className="Popular" style={{  maxWidth: "1000px", marginLeft: "auto", marginRight: "auto" }}>
+        <div className="Popular" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Popular Palettes</h1>
             <select name="filer" onChange={ handleChange } style={{ width: "200px" }}>
                 <option value={ TIME_FILTER.ALL_TIME }>All Time</option>
@@ -45,8 +45,8 @@ function Popular() {
                 <option value={ TIME_FILTER.THIS_MONTH }>This Month</option>
                 <option value={ TIME_FILTER.THIS_WEEK }>This Week</option>
             </select>
-            <div className="flex one two-500 three-800">
-                {palettes.map(palette => <div><ColorPalette
+            <div className="flex one two-500 three-700 four-1000">
+                {palettes.map(palette => <div style={{ padding:"10px" }}><ColorPalette
                                             colors={[palette.color0, palette.color1, palette.color2, palette.color3, palette.color4]}
                                             date_created = { palette.date_created}
                                             num_likes = { palette.num_likes }/></div> )}
