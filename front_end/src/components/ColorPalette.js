@@ -2,7 +2,16 @@ import { useState, useEffect } from "react";
 
 function ColorPalette({ colors, date_created, num_likes}) {
 
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(() => {
+        let saved = localStorage.getItem("palettes");
+        if(saved) {
+            let liked_palettes = JSON.parse(saved);
+            let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+            let found = liked_palettes.find(paletteID => paletteID === thisPaletteID);
+            if(found) return true;
+        }
+        return false;
+    });
     const [numLikes, setNumLikes] = useState(num_likes);
 
     const colorPalette_style = {
