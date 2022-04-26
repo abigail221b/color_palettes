@@ -6,6 +6,12 @@ function Random() {
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(0);
 
+    useEffect(() => {
+        fetch("/palettes/random")
+        .then(res => res.json())
+        .then(data => setPalettes(data));
+    }, [page]);
+
     return (
         <div className="Random" style={{ maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Random Color Palettes</h1>
