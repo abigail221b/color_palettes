@@ -7,10 +7,12 @@ function ColorPalette({ colors, date_created, num_likes}) {
 
     const colorPalette_style = {
         height: "225px",
+        width: "100%",
         padding: 0,
         display: "flex",
         flexDirection: "column",
-        boxShadow: "0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2) "
+        boxShadow: "0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2) ",
+        border: "none"
     };
 
     const colorView_style = {
@@ -95,7 +97,7 @@ function ColorPalette({ colors, date_created, num_likes}) {
     }, [liked]);
 
     return (
-        <div className="ColorPalette" style={ colorPalette_style }>
+        <div className="ColorPalette card" style={ colorPalette_style }>
             <div className="colorView" style={ colorView_style }>
                 { colors.map(color => <div style={{ ...colorBlock_style, backgroundColor:`#${color}` }}></div>) }
             </div>
