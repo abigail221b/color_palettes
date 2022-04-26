@@ -75,25 +75,19 @@ function ColorPalette({ colors, date_created, num_likes}) {
     }
 
     useEffect(() => {
-        if(liked) {
-            if(!localStorage.getItem("palettes")) {
-                localStorage.setItem("palettes", JSON.stringify([]));
-            }
-            let saved = localStorage.getItem("palettes");
-            let liked_palettes = JSON.parse(saved);
-            let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+        if(!localStorage.getItem("palettes"))
+            localStorage.setItem("palettes", JSON.stringify([]));
+
+        let saved = localStorage.getItem("palettes");
+        let liked_palettes = JSON.parse(saved);
+        let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+
+        if(liked)
             liked_palettes = [...liked_palettes, thisPaletteID];
-            localStorage.setItem("palettes", JSON.stringify(liked_palettes));
-        } else {
-            if(!localStorage.getItem("palettes")) {
-                localStorage.setItem("palettes", JSON.stringify([]));
-            }
-            let saved = localStorage.getItem("palettes");
-            let liked_palettes = JSON.parse(saved);
-            let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+        else
             liked_palettes = liked_palettes.filter(paletteID => paletteID !== thisPaletteID);
-            localStorage.setItem("palettes", JSON.stringify(liked_palettes));
-        }
+
+        localStorage.setItem("palettes", JSON.stringify(liked_palettes));
     }, [liked]);
 
     return (
