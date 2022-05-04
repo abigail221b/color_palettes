@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Create from "./routes/Create";
 import Popular from "./routes/Popular";
 import New from "./routes/New";
-import Random from "./routes/Random";
 import Liked from "./routes/Liked";
 
 ReactDOM.render(
@@ -17,7 +16,6 @@ ReactDOM.render(
                     <Route index element={<Popular />} />
                     <Route path="popular" element={<Popular />} />
                     <Route path="new" element={<New />} />
-                    <Route path="random" element={<Random />} />
                     <Route path="liked_palettes" element={<Liked />} />
                     <Route path="create" element={<Create />} />
                 </Route>

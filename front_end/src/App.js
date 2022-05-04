@@ -15,7 +15,6 @@ function App() {
                 <div className="menu">
                     <Link to="popular">Popular</Link>
                     <Link to="new">New</Link>
-                    <Link to="random">Random</Link>
                     <Link to="liked_palettes">Liked Palettes</Link>
                     <Link to="create"><button>Create</button></Link>
                 </div>
