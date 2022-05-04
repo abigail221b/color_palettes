@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Create from "./routes/Create";
-import Popular from "./routes/Popular";
-import New from "./routes/New";
-import Liked from "./routes/Liked";
+import Create from "./pages/Create";
+import Popular from "./pages/Popular";
+import New from "./pages/New";
+import Liked from "./pages/Liked";
 
 ReactDOM.render(
     <React.StrictMode>
