@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import ColorPalette from "../components/ColorPalette.js";
 
 function Liked() {
-    const [palettes, setPalettes] = useState(() => {
-        let saved = localStorage.getItem("palettes");
-        if(saved) {
-            return JSON.parse(saved);
-        }
-        return [];
-    });
+    const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(0);
 
     return (
