@@ -57,17 +57,17 @@ app.post("/palette/create", (req, res) => {
 });
 
 // GET new color palettes (15 palettes at a time)
-app.get("/palettes/new/:page", (req, res) => {
+app.get("/palettes/new", (req, res) => {
     let num_palettes = 15;
-    let page = req.params.page;
-    let offset = page * num_palettes;
+    let page = req.query.page;
+    let offset = (page - 1) * num_palettes;
     connection.query(`SELECT * FROM color_palette ORDER BY date_created DESC LIMIT ${offset},${num_palettes}`,
         (err, rows) => {
             if (err) throw err;
             res.send(rows);
         });
 });
-  
+
 // GET popular color palettes (15 palettes at a time)
 //  - of all time
 //  - this year
@@ -79,11 +79,11 @@ const TIME_FILTER = {
     THIS_MONTH: "this_month",
     THIS_WEEK: "this_week"
 };
-app.get("/palettes/popular/:time_filter/:page", (req, res) => {
+app.get("/palettes/popular/:time_filter", (req, res) => {
     let time_filter = req.params.time_filter;
-    let page = req.params.page;
+    let page = req.query.page;
     let num_palettes = 15;
-    let offset = page * num_palettes;
+    let offset = (page - 1) * num_palettes;
     let query = "";
 
     switch(time_filter) {
