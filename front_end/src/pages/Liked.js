@@ -3,7 +3,7 @@ import ColorPalette from "../components/ColorPalette.js";
 
 function Liked() {
     const [palettes, setPalettes] = useState([]);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     return (
         <div className="Liked" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>

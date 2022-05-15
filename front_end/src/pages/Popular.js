@@ -12,7 +12,7 @@ function Popular() {
 
     const [palettes, setPalettes] = useState([]);
     const [filter, setFilter] = useState(TIME_FILTER.ALL_TIME);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     function handleChange(e) {
         switch(e.target.value) {

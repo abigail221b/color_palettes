@@ -4,7 +4,7 @@ import ColorPalette from "../components/ColorPalette.js";
 function New() {
 
     const [palettes, setPalettes] = useState([]);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         fetch(`/palettes/new/${ page }`)
