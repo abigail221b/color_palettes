@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Create from "./pages/Create";
 import Popular from "./pages/Popular";
 import New from "./pages/New";
-import Liked from "./pages/Liked";
+import Liked from "./pages/Likes";
 
 ReactDOM.render(
     <React.StrictMode>
