@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
 import ColorPalette from "../components/ColorPalette.js";
 
-const TIME_FILTER = {
-    ALL_TIME: "all_time",
-    THIS_YEAR: "this_year",
-    THIS_MONTH: "this_month",
-    THIS_WEEK: "this_week"
+const SORT = {
+    ALL_TIME: "all",
+    THIS_YEAR: "year",
+    THIS_MONTH: "month",
+    THIS_WEEK: "week"
 };
 
 function Popular() {
 
     const [palettes, setPalettes] = useState([]);
-    const [filter, setFilter] = useState(TIME_FILTER.ALL_TIME);
+    const [filter, setFilter] = useState(SORT.ALL_TIME);
     const [page, setPage] = useState(1);
 
     function handleChange(e) {
         switch(e.target.value) {
-            case TIME_FILTER.THIS_YEAR:
-                setFilter(TIME_FILTER.THIS_YEAR);
+            case SORT.THIS_YEAR:
+                setFilter(SORT.THIS_YEAR);
                 break;
-            case TIME_FILTER.THIS_MONTH:
-                setFilter(TIME_FILTER.THIS_MONTH);
+            case SORT.THIS_MONTH:
+                setFilter(SORT.THIS_MONTH);
                 break;
-            case TIME_FILTER.THIS_WEEK:
-                setFilter(TIME_FILTER.THIS_WEEK);
+            case SORT.THIS_WEEK:
+                setFilter(SORT.THIS_WEEK);
                 break;
             default:
-                setFilter(TIME_FILTER.ALL_TIME);
+                setFilter(SORT.ALL_TIME);
         }
     }
 
@@ -40,10 +40,10 @@ function Popular() {
         <div className="Popular" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Popular Palettes</h1>
             <select name="filer" onChange={ handleChange } style={{ width: "200px" }}>
-                <option value={ TIME_FILTER.ALL_TIME }>All Time</option>
-                <option value={ TIME_FILTER.THIS_YEAR }>This Year</option>
-                <option value={ TIME_FILTER.THIS_MONTH }>This Month</option>
-                <option value={ TIME_FILTER.THIS_WEEK }>This Week</option>
+                <option value={ SORT.ALL_TIME }>All Time</option>
+                <option value={ SORT.THIS_YEAR }>This Year</option>
+                <option value={ SORT.THIS_MONTH }>This Month</option>
+                <option value={ SORT.THIS_WEEK }>This Week</option>
             </select>
             <div className="flex one two-500 three-700 four-1000">
                 {palettes.map(palette => <div style={{ padding:"10px" }}>
