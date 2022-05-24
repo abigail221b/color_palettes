@@ -7,7 +7,7 @@ function New() {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        fetch(`/palettes/new/${ page }`)
+        fetch(`/palettes/new/?page=${ page }`)
         .then(res => res.json())
         .then(data => {
             console.log(data);
