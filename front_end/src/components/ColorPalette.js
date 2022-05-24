@@ -48,7 +48,7 @@ function ColorPalette({ colors, date_created, num_likes}) {
         const dateObj = new Date(date);
         let year = dateObj.getFullYear();
         let month = dateObj.getMonth();
-        let day = dateObj.getDay();
+        let day = dateObj.getDate();
         let hour = dateObj.getHours();
         let minute = dateObj.getMinutes();
         let second = dateObj.getSeconds();
@@ -56,16 +56,20 @@ function ColorPalette({ colors, date_created, num_likes}) {
         const now = new Date();
         let yearNow = now.getFullYear();
         let monthNow = now.getMonth();
-        let dayNow = now.getDay();
+        let dayNow = now.getDate();
         let hourNow = now.getHours();
         let minuteNow = now.getMinutes();
         let secondNow = now.getSeconds();
 
-        if(yearNow - year == 0)
-            if(monthNow - month == 0)
-                if(dayNow - day == 0)
-                    if(hourNow - hour == 0)
-                        if(minuteNow - minute == 0)
+        console.log("num_likes " + num_likes);
+        console.log("month diff: " + (monthNow - month));
+        console.log("daynow" + dayNow + " day" + day);
+
+        if(yearNow - year === 0)
+            if(monthNow - month === 0)
+                if(dayNow - day === 0)
+                    if(hourNow - hour === 0)
+                        if(minuteNow - minute === 0)
                             return "now";
                         else return `${ minuteNow - minute } ${ minuteNow - minute === 1? "minute" : "minutes"} ago`;
                     else return `${ hourNow - hour } ${ hourNow - hour === 1? "hour" : "hours"} ago`;
