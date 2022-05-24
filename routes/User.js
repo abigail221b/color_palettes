@@ -24,9 +24,15 @@ router.put("/like", (req, res) => {
             });
 });
 
-// !!! Todo
 router.put("/unlike", (req, res) => {
-    res.send("user unlike palette");
+    pool.query(`DELETE FROM user_likes_palette WHERE username='${req.query.username}' AND color0='${req.query.color0}'AND color1='${req.query.color1}'AND color2='${req.query.color2}'AND color3='${req.query.color3}'AND color4='${req.query.color4}';
+                UPDATE color_palette
+                SET num_likes = num_likes - 1
+                WHERE color0='${req.query.color0}' AND color1='${req.query.color1}' AND color2='${req.query.color2}' AND color3='${req.query.color3}' AND color4='${req.query.color4}'`,
+        (err, rows) => {
+            if (err) throw err;
+            res.send(rows);
+        });
 });
 
 module.exports = router;
