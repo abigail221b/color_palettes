@@ -5,6 +5,12 @@ function Liked() {
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
 
+    useEffect(() => {
+        fetch("/user/likes?username=demo_user")
+        .then(res => res.json())
+        .then(palettes => setPalettes(palettes));
+    }, []);
+
     return (
         <div className="Liked" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Liked Color Palettes</h1>
