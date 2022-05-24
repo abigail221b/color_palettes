@@ -12,9 +12,16 @@ router.get("/likes", (req, res) => {
         });
 });
 
-// !!! Todo
 router.put("/like", (req, res) => {
-    res.send("user like palette");
+    pool.query(`INSERT INTO user_likes_palette
+                VALUES ('${req.query.username}', '${req.query.color0}', '${req.query.color1}', '${req.query.color2}', '${req.query.color3}', '${req.query.color4}');
+                UPDATE color_palette
+                SET num_likes = num_likes+1
+                WHERE color0='${req.query.color0}' AND color1='${req.query.color1}' AND color2='${req.query.color2}' AND color3='${req.query.color3}' AND color4='${req.query.color4}'`,
+            (err, rows) => {
+                if(err) throw err;
+                res.send(rows);
+            });
 });
 
 // !!! Todo
