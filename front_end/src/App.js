@@ -15,7 +15,7 @@ function App() {
                 <div className="menu">
                     <Link to="popular">Popular</Link>
                     <Link to="new">New</Link>
-                    <Link to="liked_palettes">Liked Palettes</Link>
+                    <Link to="liked_palettes">Likes</Link>
                     <Link to="create"><button>Create</button></Link>
                 </div>
             </nav>
