@@ -61,10 +61,6 @@ function ColorPalette({ colors, date_created, num_likes}) {
         let minuteNow = now.getMinutes();
         let secondNow = now.getSeconds();
 
-        console.log("num_likes " + num_likes);
-        console.log("month diff: " + (monthNow - month));
-        console.log("daynow" + dayNow + " day" + day);
-
         if(yearNow - year === 0)
             if(monthNow - month === 0)
                 if(dayNow - day === 0)
