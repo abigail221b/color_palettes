@@ -77,12 +77,12 @@ function ColorPalette({ colors, date_created, num_likes}) {
     const handleLike = () => {
         if(liked) {
             setNumLikes(numLikes => numLikes-1);
-            fetch(`/user/unlike/?username=demo_user&color0=${colors[0]}&color1=${colors[1]}&color2=${colors[2]}&color3=${colors[3]}&color4=${colors[4]}`, {
+            fetch(`/user/demo_user/palette/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/unlike`, {
                 method: "PUT"
             });
         } else {
             setNumLikes(numLikes => numLikes+1);
-            fetch(`/user/like/?username=demo_user&color0=${colors[0]}&color1=${colors[1]}&color2=${colors[2]}&color3=${colors[3]}&color4=${colors[4]}`, {
+            fetch(`/user/demo_user/palette/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/like`, {
                 method: "PUT"
             });
         }
