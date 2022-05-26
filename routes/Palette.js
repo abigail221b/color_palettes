@@ -3,21 +3,14 @@ const router = express.Router();
 const pool = require("../database_pool.js");
 
 /* Get a color palette by id */
-router.get("/:id", (req, res) => {
-    let paletteID = req.params.id;
-    let color0 = paletteID.substr(0,  6);
-    let color1 = paletteID.substr(6,  6);
-    let color2 = paletteID.substr(12, 6);
-    let color3 = paletteID.substr(18, 6);
-    let color4 = paletteID.substr(24, 6);
-
+router.get("/:color0/:color1/:color2/:color3/:color4", (req, res) => {
     pool.query(`SELECT *
                 FROM color_palette
-                WHERE color0 = '${ color0 }'
-                    AND color1 = '${ color1 }'
-                    AND color2 = '${ color2 }'
-                    AND color3 = '${ color3 }'
-                    AND color4 = '${ color4 }'`,
+                WHERE color0 = '${ req.params.color0 }'
+                    AND color1 = '${ req.params.color1 }'
+                    AND color2 = '${ req.params.color2 }'
+                    AND color3 = '${ req.params.color3 }'
+                    AND color4 = '${ req.params.color4 }'`,
         (err, rows) => {
             if (err) throw err;
             res.send(rows[0]);
