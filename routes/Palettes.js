@@ -4,7 +4,7 @@ const pool = require("../database_pool.js");
 
 /* GET new color palettes */
 router.get("/new", (req, res) => {
-    let num_palettes = 15;
+    let num_palettes = req.query.limit;
     let page = req.query.page;
     let offset = (page - 1) * num_palettes;
 
@@ -33,7 +33,7 @@ const SORT = {
 }
 router.get("/popular/:sort", (req, res) => {
     let sort = req.params.sort;
-    let num_palettes = 15;
+    let num_palettes = req.query.limit;
     let page = req.query.page;
     let offset = (page - 1) * num_palettes;
     let query = "SELECT * FROM color_palette ";
