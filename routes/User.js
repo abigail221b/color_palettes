@@ -2,33 +2,33 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../database_pool.js");
 
-router.get("/likes", (req, res) => {
+router.get("/:username/palettes/likes", (req, res) => {
     pool.query(`SELECT *
                 FROM user_likes_palette ulp LEFT JOIN color_palette p ON ulp.color0=p.color0 AND ulp.color1=p.color1 AND ulp.color2=p.color2 AND ulp.color3=p.color3 AND ulp.color4=p.color4
-                WHERE username='${ req.query.username }'`,
+                WHERE username='${ req.params.username }'`,
         (err, rows) => {
             if (err) throw err;
             res.send(rows);
         });
 });
 
-router.put("/like", (req, res) => {
+router.put("/:username/palette/:color0/:color1/:color2/:color3/:color4/like", (req, res) => {
     pool.query(`INSERT INTO user_likes_palette
-                VALUES ('${req.query.username}', '${req.query.color0}', '${req.query.color1}', '${req.query.color2}', '${req.query.color3}', '${req.query.color4}');
+                VALUES ('${req.params.username}', '${req.params.color0}', '${req.params.color1}', '${req.params.color2}', '${req.params.color3}', '${req.params.color4}');
                 UPDATE color_palette
                 SET num_likes = num_likes+1
-                WHERE color0='${req.query.color0}' AND color1='${req.query.color1}' AND color2='${req.query.color2}' AND color3='${req.query.color3}' AND color4='${req.query.color4}'`,
+                WHERE color0='${req.params.color0}' AND color1='${req.params.color1}' AND color2='${req.params.color2}' AND color3='${req.params.color3}' AND color4='${req.params.color4}'`,
             (err, rows) => {
                 if(err) throw err;
                 res.send(rows);
             });
 });
 
-router.put("/unlike", (req, res) => {
-    pool.query(`DELETE FROM user_likes_palette WHERE username='${req.query.username}' AND color0='${req.query.color0}'AND color1='${req.query.color1}'AND color2='${req.query.color2}'AND color3='${req.query.color3}'AND color4='${req.query.color4}';
+router.put("/:username/palette/:color0/:color1/:color2/:color3/:color4/unlike", (req, res) => {
+    pool.query(`DELETE FROM user_likes_palette WHERE username='${req.params.username}' AND color0='${req.params.color0}'AND color1='${req.params.color1}'AND color2='${req.params.color2}'AND color3='${req.params.color3}'AND color4='${req.params.color4}';
                 UPDATE color_palette
                 SET num_likes = num_likes - 1
-                WHERE color0='${req.query.color0}' AND color1='${req.query.color1}' AND color2='${req.query.color2}' AND color3='${req.query.color3}' AND color4='${req.query.color4}'`,
+                WHERE color0='${req.params.color0}' AND color1='${req.params.color1}' AND color2='${req.params.color2}' AND color3='${req.params.color3}' AND color4='${req.params.color4}'`,
         (err, rows) => {
             if (err) throw err;
             res.send(rows);
