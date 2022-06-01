@@ -75,8 +75,16 @@ function ColorPalette({ colors, date_created, num_likes}) {
     }
 
     const handleLike = () => {
+        if(!localStorage.getItem("palettes"))
+            localStorage.setItem("palettes", JSON.stringify([]));
+
+        let saved = localStorage.getItem("palettes");
+        let liked_palettes = JSON.parse(saved);
+        let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
+
         if(liked) {
             setNumLikes(numLikes => numLikes-1);
+            liked_palettes = liked_palettes.filter(paletteID => paletteID !== thisPaletteID);
             fetch(`/user/demo_user/palette/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/unlike`, {
                 method: "PUT"
             });
@@ -85,25 +93,11 @@ function ColorPalette({ colors, date_created, num_likes}) {
             fetch(`/user/demo_user/palette/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/like`, {
                 method: "PUT"
             });
+            liked_palettes = [...liked_palettes, thisPaletteID];
         }
+        localStorage.setItem("palettes", JSON.stringify(liked_palettes));
         setLiked(!liked);
     }
-
-    useEffect(() => {
-        if(!localStorage.getItem("palettes"))
-            localStorage.setItem("palettes", JSON.stringify([]));
-
-        let saved = localStorage.getItem("palettes");
-        let liked_palettes = JSON.parse(saved);
-        let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
-
-        if(liked)
-            liked_palettes = [...liked_palettes, thisPaletteID];
-        else
-            liked_palettes = liked_palettes.filter(paletteID => paletteID !== thisPaletteID);
-
-        localStorage.setItem("palettes", JSON.stringify(liked_palettes));
-    }, [liked]);
 
     return (
         <div className="ColorPalette card" style={ colorPalette_style }>
