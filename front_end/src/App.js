@@ -34,8 +34,8 @@ function App() {
                         demo_user
                         <div style={isMenuExpanded? {"border":"1px solid black", "padding":"10px" ,"display":"flex", "flex-direction":"column", "position": "absolute", "minWidth":"200px", "textAlign": "left"} : {"display":"none"}}>
                             <Link to="create">Create</Link>
-                            <Link to="likes">My Likes</Link>
-                            <Link to="collection">My Likes</Link>
+                            <Link to="likes">Likes</Link>
+                            <Link to="collection">Collection</Link>
                         </div>
                     </a>
                 </div>
