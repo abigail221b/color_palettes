@@ -7,6 +7,7 @@ import Create from "./pages/Create";
 import Popular from "./pages/Popular";
 import New from "./pages/New";
 import Liked from "./pages/Likes";
+import Collection from "./pages/Collection";
 
 ReactDOM.render(
     <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.render(
                     <Route path="new" element={<New />} />
                     <Route path="likes" element={<Liked />} />
                     <Route path="create" element={<Create />} />
+                    <Route path="collection" element={<Collection />} />
                 </Route>
             </Routes>
         </BrowserRouter>
