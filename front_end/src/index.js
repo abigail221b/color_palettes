@@ -16,7 +16,7 @@ ReactDOM.render(
                     <Route index element={<Popular />} />
                     <Route path="popular" element={<Popular />} />
                     <Route path="new" element={<New />} />
-                    <Route path="liked_palettes" element={<Liked />} />
+                    <Route path="likes" element={<Liked />} />
                     <Route path="create" element={<Create />} />
                 </Route>
             </Routes>
