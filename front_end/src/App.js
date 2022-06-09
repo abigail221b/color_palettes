@@ -1,8 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import './App.css';
 
 function App() {
+
+    const [isMenuExpanded, setIsMenuExpanded] = useState(false);
 
     fetch("/user/demo_user/palettes/likes")
     .then(res => res.json())
@@ -12,6 +14,8 @@ function App() {
         });
         localStorage.setItem("palettes", JSON.stringify(store));
     });
+
+
 
     return (
         <div className="App">
@@ -26,8 +30,14 @@ function App() {
                 <div className="menu">
                     <Link to="popular">Popular</Link>
                     <Link to="new">New</Link>
-                    <Link to="likes">Likes</Link>
-                    <Link to="create"><button>Create</button></Link>
+                    <a style={{"position":"relative", "cursor":"pointer"}} onClick={() => setIsMenuExpanded(isMenuExpanded => !isMenuExpanded)}>
+                        demo_user
+                        <div style={isMenuExpanded? {"border":"1px solid black", "padding":"10px" ,"display":"flex", "flex-direction":"column", "position": "absolute", "minWidth":"200px", "textAlign": "left"} : {"display":"none"}}>
+                            <Link to="create">Create</Link>
+                            <Link to="likes">My Likes</Link>
+                            <Link to="collection">My Likes</Link>
+                        </div>
+                    </a>
                 </div>
             </nav>
             <div className="wrapper">
