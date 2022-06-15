@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ColorPalette from "../components/ColorPalette.js";
 
 function Collection() {
     const [palettes, setPalettes] = useState([]);
+
+    useEffect(() => {
+        fetch("/user/demo_user/palettes")
+        .then(res => res.json())
+        .then(palettes => setPalettes(palettes));
+    }, []);
 
     return (
         <div className="Collection" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
