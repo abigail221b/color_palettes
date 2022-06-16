@@ -12,7 +12,7 @@ function Collection() {
 
     return (
         <div className="Collection" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
-            <h1>Collection</h1>
+            <h1>My Collection</h1>
             <div className="flex one two-500 three-700 four-1000">
                 {palettes.map(palette => <div style={{ padding:"10px" }}>
                                             <ColorPalette
