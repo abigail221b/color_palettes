@@ -31,7 +31,7 @@ const FILTER = {
     MONTH: "month",
     WEEK: "week",
 }
-router.get("/popular/:sort", (req, res) => {
+router.get("/popular/", (req, res) => {
     let filter = req.query.filter;
     let num_palettes = req.query.limit;
     let page = req.query.page;
