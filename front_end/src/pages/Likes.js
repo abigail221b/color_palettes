@@ -6,7 +6,7 @@ function Liked() {
     const [page, setPage] = useState(1);
 
     useEffect(() => {
-        fetch("/user/demo_user/palettes/likes")
+        fetch("/palettes/user/demoUser121/likes")
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);

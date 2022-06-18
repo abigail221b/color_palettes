@@ -5,7 +5,7 @@ function Collection() {
     const [palettes, setPalettes] = useState([]);
 
     useEffect(() => {
-        fetch("/user/demo_user/palettes")
+        fetch("/palettes/user/demoUser121")
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);
