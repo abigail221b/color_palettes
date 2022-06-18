@@ -25,34 +25,34 @@ router.get("/new", (req, res) => {
     - this month
     - this week
 */
-const SORT = {
+const FILTER = {
     ALL: "all",
     YEAR: "year",
     MONTH: "month",
     WEEK: "week",
 }
 router.get("/popular/:sort", (req, res) => {
-    let sort = req.params.sort;
+    let filter = req.query.filter;
     let num_palettes = req.query.limit;
     let page = req.query.page;
     let offset = (page - 1) * num_palettes;
     let query = "SELECT * FROM color_palette NATURAL JOIN user_creates_palette ";
 
-    switch(sort) {
-        case SORT.YEAR:
+    switch(filter) {
+        case FILTER.YEAR:
             query = query +
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE())
                     ORDER BY num_likes DESC
                     LIMIT ${ offset }, ${ num_palettes }`;
             break;
-        case SORT.MONTH:
+        case FILTER.MONTH:
             query = query +
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) AND
                     MONTH(date_created) = MONTH(CURRENT_DATE)
                     ORDER BY num_likes DESC
                     LIMIT ${ offset }, ${ num_palettes }`;
             break;
-        case SORT.WEEK:
+        case FILTER.WEEK:
             query = query +
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) AND
                     MONTH(date_created) = MONTH(CURRENT_DATE()) AND
