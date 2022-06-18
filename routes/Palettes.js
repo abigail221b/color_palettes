@@ -9,7 +9,7 @@ router.get("/new", (req, res) => {
     let offset = (page - 1) * num_palettes;
 
     pool.query(`SELECT *
-                FROM color_palette
+                FROM color_palette NATURAL JOIN user_creates_palette
                 ORDER BY date_created DESC
                 LIMIT ${ offset }, ${ num_palettes }`,
         (err, rows) => {
@@ -36,7 +36,7 @@ router.get("/popular/:sort", (req, res) => {
     let num_palettes = req.query.limit;
     let page = req.query.page;
     let offset = (page - 1) * num_palettes;
-    let query = "SELECT * FROM color_palette ";
+    let query = "SELECT * FROM color_palette NATURAL JOIN user_creates_palette ";
 
     switch(sort) {
         case SORT.YEAR:
