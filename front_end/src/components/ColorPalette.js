@@ -85,12 +85,12 @@ function ColorPalette({ creator, colors, date_created, num_likes}) {
         if(liked) {
             setNumLikes(numLikes => numLikes-1);
             liked_palettes = liked_palettes.filter(paletteID => paletteID !== thisPaletteID);
-            fetch(`/user/demo_user/palette/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/unlike`, {
+            fetch(`/palettes/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/?username=demoUser121&like=false`, {
                 method: "PUT"
             });
         } else {
             setNumLikes(numLikes => numLikes+1);
-            fetch(`/user/demo_user/palette/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/like`, {
+            fetch(`/palettes/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/?username=demoUser121&like=true`, {
                 method: "PUT"
             });
             liked_palettes = [...liked_palettes, thisPaletteID];
