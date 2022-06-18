@@ -127,4 +127,16 @@ router.put("/:color0/:color1/:color2/:color3/:color4/", (req, res) => {
     }
 });
 
+// Get color palettes created by a specific user
+router.get("/user/:username", (req, res) => {
+    pool.query(`SELECT *
+                FROM user_creates_palette ucp LEFT JOIN color_palette p ON ucp.color0=p.color0 AND ucp.color1=p.color1 AND ucp.color2=p.color2 AND ucp.color3=p.color3 AND ucp.color4=p.color4
+                WHERE username='${ req.params.username }'
+                ORDER BY date_created DESC`,
+        (err, rows) => {
+            if (err) throw err;
+            res.send(rows);
+        });
+});
+
 module.exports = router;
