@@ -127,6 +127,17 @@ router.put("/:color0/:color1/:color2/:color3/:color4/", (req, res) => {
     }
 });
 
+// Get color palettes liked by a specific user
+router.get("/user/:username/likes", (req, res) => {
+    pool.query(`SELECT *
+            FROM user_likes_palette ulp LEFT JOIN color_palette p ON ulp.color0=p.color0 AND ulp.color1=p.color1 AND ulp.color2=p.color2 AND ulp.color3=p.color3 AND ulp.color4=p.color4
+            WHERE username='${ req.params.username }'`,
+    (err, rows) => {
+        if (err) throw err;
+        res.send(rows);
+    });
+});
+
 // Get color palettes created by a specific user
 router.get("/user/:username", (req, res) => {
     pool.query(`SELECT *
