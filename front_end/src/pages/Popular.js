@@ -49,6 +49,7 @@ function Popular() {
                 {palettes.map(palette => <div style={{ padding:"10px" }}>
                                             <ColorPalette
                                                 key={ palette.color0 + palette.color1 + palette.color2 + palette.color3 + palette.color4 }
+                                                creator={ palette.username }
                                                 colors={[palette.color0, palette.color1, palette.color2, palette.color3, palette.color4]}
                                                 date_created = { palette.date_created}
                                                 num_likes = { palette.num_likes }/></div> )}
