@@ -17,16 +17,6 @@ router.get("/:color0/:color1/:color2/:color3/:color4", (req, res) => {
         });
 });
 
-/* Create a new color palette */
-router.post("/create", (req, res) => {
-    let colors = req.body.colors.map(color => color.replace("#", ""));
-    pool.query(`INSERT INTO color_palette (color0, color1, color2, color3, color4, date_created, num_likes)
-                VALUES ('${ colors[0] }', '${ colors[1] }', '${ colors[2] }', '${ colors[3] }', '${ colors[4] }', CURRENT_TIMESTAMP(), 0);
-                INSERT INTO user_creates_palette
-                VALUES ('${ req.body.username }','${ colors[0] }', '${ colors[1] }', '${ colors[2] }', '${ colors[3] }', '${ colors[4] }')`, (err, rows) => {
-        if (err) throw err;
-        res.send(rows);
-    });
-});
+
 
 module.exports = router;
