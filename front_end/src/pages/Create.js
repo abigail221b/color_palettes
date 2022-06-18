@@ -12,7 +12,7 @@ function Create() {
     }
 
     function handleSubmit(e) {
-        fetch("/palette/create", {
+        fetch("/palettes", {
             method: "POST",
             body: JSON.stringify({ username: "demo_user", colors: colors }),
             headers: {
