@@ -31,7 +31,7 @@ function Popular() {
     }
 
     useEffect(() => {
-        fetch(`/palettes/popular/${filter}/?limit=15&page=${ page }`)
+        fetch(`/palettes/popular/?filter=${filter}&limit=15&page=${ page }`)
         .then(res => res.json())
         .then(data => setPalettes(data));
     }, [filter, page]);
