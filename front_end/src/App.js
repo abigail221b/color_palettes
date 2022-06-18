@@ -7,17 +7,6 @@ function App() {
     const [isMenuExpanded, setIsMenuExpanded] = useState(false);
     const [isSmallMenuExpanded, setIsSmallMenuExpanded] = useState(false);
 
-    fetch("/user/demo_user/palettes/likes")
-    .then(res => res.json())
-    .then(palettes => {
-        let store = palettes.map(palette => {
-            return palette.color0 + palette.color1 + palette.color2 + palette.color3 + palette.color4;
-        });
-        localStorage.setItem("palettes", JSON.stringify(store));
-    });
-
-
-
     return (
         <div className="App">
             <nav>
