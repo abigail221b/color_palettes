@@ -100,4 +100,31 @@ router.get("/:color0/:color1/:color2/:color3/:color4", (req, res) => {
         });
 });
 
+/*
+    Handle like and unlike by a specific user.
+    ex. /palettes/:color0/:color1/:color2/:color3/:color4/?username=demoUser121&like=true
+*/
+router.put("/:color0/:color1/:color2/:color3/:color4/", (req, res) => {
+    if(req.query.like === "true") {
+        pool.query(`INSERT INTO user_likes_palette
+                    VALUES ('${req.query.username}', '${req.params.color0}', '${req.params.color1}', '${req.params.color2}', '${req.params.color3}', '${req.params.color4}');
+                    UPDATE color_palette
+                    SET num_likes = num_likes+1
+                    WHERE color0='${req.params.color0}' AND color1='${req.params.color1}' AND color2='${req.params.color2}' AND color3='${req.params.color3}' AND color4='${req.params.color4}'`,
+                (err, rows) => {
+                    if(err) throw err;
+                    res.send(rows);
+                });
+    } else {
+        pool.query(`DELETE FROM user_likes_palette WHERE username='${req.query.username}' AND color0='${req.params.color0}'AND color1='${req.params.color1}'AND color2='${req.params.color2}'AND color3='${req.params.color3}'AND color4='${req.params.color4}';
+                    UPDATE color_palette
+                    SET num_likes = num_likes - 1
+                    WHERE color0='${req.params.color0}' AND color1='${req.params.color1}' AND color2='${req.params.color2}' AND color3='${req.params.color3}' AND color4='${req.params.color4}'`,
+            (err, rows) => {
+                if (err) throw err;
+                res.send(rows);
+            });
+    }
+});
+
 module.exports = router;
