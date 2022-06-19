@@ -9,12 +9,14 @@ import New from "./pages/New";
 import Liked from "./pages/Likes";
 import Collection from "./pages/Collection";
 
+import { store } from "./redux/store";
+import { Provider, dispatch } from "react-redux";
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={ <App /> }>
+                <Route path="/" element={ <Provider store={ store }><App /></Provider> }>
                     <Route index element={<Popular />} />
                     <Route path="popular" element={<Popular />} />
                     <Route path="new" element={<New />} />
