@@ -9,15 +9,6 @@ import New from "./pages/New";
 import Liked from "./pages/Likes";
 import Collection from "./pages/Collection";
 
-// Fetch user likes before App component renders
-fetch("/user/demo_user/palettes/likes")
-.then(res => res.json())
-.then(palettes => {
-    let store = palettes.map(palette => {
-        return palette.color0 + palette.color1 + palette.color2 + palette.color3 + palette.color4;
-    });
-    localStorage.setItem("palettes", JSON.stringify(store));
-});
 
 ReactDOM.render(
     <React.StrictMode>
