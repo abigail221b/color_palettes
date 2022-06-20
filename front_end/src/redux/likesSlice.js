@@ -4,13 +4,6 @@ const initialState = {
     palettes: []
 }
 
-// Fetch user likes before App component renders
-fetch("/user/demo_user/palettes/likes")
-.then(res => res.json())
-.then(palettes => {
-    initialState.palettes = palettes;
-});
-
 export const likesSlice = createSlice({
     name: "likes",
     initialState,
