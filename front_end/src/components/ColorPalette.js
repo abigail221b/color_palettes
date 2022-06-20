@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { like, unlike } from "../redux/likesSlice.js";
 
-function ColorPalette({ creator, colors, date_created, num_likes}) {
+function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser }) {
 
     const [liked, setLiked] = useState(isLikedByUser);
     const [numLikes, setNumLikes] = useState(num_likes);
