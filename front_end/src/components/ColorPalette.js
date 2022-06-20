@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { like, unlike } from "../redux/likesSlice.js";
 
 function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser }) {
 
-    const [liked, setLiked] = useState(() => {
-        let saved = localStorage.getItem("palettes");
-        if(saved) {
-            let liked_palettes = JSON.parse(saved);
-            let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
-            let found = liked_palettes.find(paletteID => paletteID === thisPaletteID);
-            if(found) return true;
-        }
-        return false;
-    });
+    const [liked, setLiked] = useState(isLikedByUser);
     const [numLikes, setNumLikes] = useState(num_likes);
+    const dispatch = useDispatch();
 
     const colorPalette_style = {
         height: "235px",
@@ -75,27 +69,19 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
     }
 
     const handleLike = () => {
-        if(!localStorage.getItem("palettes"))
-            localStorage.setItem("palettes", JSON.stringify([]));
-
-        let saved = localStorage.getItem("palettes");
-        let liked_palettes = JSON.parse(saved);
-        let thisPaletteID = colors[0] + colors[1] + colors[2] + colors[3] + colors[4];
-
         if(liked) {
             setNumLikes(numLikes => numLikes-1);
-            liked_palettes = liked_palettes.filter(paletteID => paletteID !== thisPaletteID);
             fetch(`/palettes/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/?username=demoUser121&like=false`, {
                 method: "PUT"
             });
+            dispatch(unlike({ color0: colors[0], color1: colors[1], color2: colors[2], color3: colors[3], color4: colors[4] }));
         } else {
             setNumLikes(numLikes => numLikes+1);
             fetch(`/palettes/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/?username=demoUser121&like=true`, {
                 method: "PUT"
             });
-            liked_palettes = [...liked_palettes, thisPaletteID];
+            dispatch(like({ color0: colors[0], color1: colors[1], color2: colors[2], color3: colors[3], color4: colors[4] }));
         }
-        localStorage.setItem("palettes", JSON.stringify(liked_palettes));
         setLiked(!liked);
     }
 
