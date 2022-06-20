@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function ColorPalette({ creator, colors, date_created, num_likes}) {
+function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser }) {
 
     const [liked, setLiked] = useState(() => {
         let saved = localStorage.getItem("palettes");
