@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import ColorPalette from "../components/ColorPalette.js";
 
 function Liked() {
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
+    const likedPalettes = useSelector(state => state.likes.palettes);
 
     useEffect(() => {
         fetch("/palettes/user/demoUser121/likes")
@@ -20,7 +22,8 @@ function Liked() {
                                                 creator={ palette.username }
                                                 colors={[palette.color0, palette.color1, palette.color2, palette.color3, palette.color4]}
                                                 date_created = { palette.date_created}
-                                                num_likes = { palette.num_likes }/>
+                                                num_likes = { palette.num_likes }
+                                                isLikedByUser = { likedPalettes.filter(likedPalette => likedPalette.color0 === palette.color0 && likedPalette.color1 === palette.color1 && likedPalette.color2 === palette.color2 && likedPalette.color3 === palette.color3 && likedPalette.color4 === palette.color4).length > 0 } />
                                          </div> )}
             </div>
         </div>
