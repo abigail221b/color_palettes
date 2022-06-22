@@ -51,10 +51,9 @@ function NavBar() {
     const loggedOut_menu = (
         <>
             <span class="button" style={{ "backgroundColor": "yellow" }}><Link to="login">Log in</Link></span>
-            <span class="button" style={{ "backgroundColor": "yellow" }}><Link to="register">Sign up</Link></span>
+            <span class="button" style={{ "backgroundColor": "yellow" }}><Link to="signup">Sign up</Link></span>
         </>
     );
-
 
     return (
         <nav>
