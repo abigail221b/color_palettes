@@ -22,7 +22,7 @@ function App() {
     return (
         <div className="App">
             <div className="wrapper">
-                <NavBar />
+                <NavBar isLoggedIn={ isLoggedIn }/>
                 <Outlet />
             </div>
         </div>
