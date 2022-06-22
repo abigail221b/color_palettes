@@ -6,7 +6,7 @@ function NavBar() {
 
     const [isMenuExpanded, setIsMenuExpanded] = useState(false);
     const [isSmallMenuExpanded, setIsSmallMenuExpanded] = useState(false);
-    const isLoggedIn = useSelector(state => state.loggedIn.value);
+    const isLoggedIn = useSelector(state => state.isLoggedIn.value);
 
     const subMenu_style = {
         "position" : "absolute",
