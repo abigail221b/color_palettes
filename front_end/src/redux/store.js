@@ -5,6 +5,6 @@ import loggedInReducer from "./loggedInSlice.js";
 export const store = configureStore({
     reducer: {
         likes: likesReducer,
-        loggedIn: loggedInReducer
+        isLoggedIn: loggedInReducer
     }
 });
