@@ -14,10 +14,16 @@ export const loginSlice = createSlice({
                 isLoggedIn: action.payload.isLoggedIn,
                 username: action.payload.username
             }
+        },
+        logout: (state) => {
+            return {
+                isLoggedIn: false,
+                username: null
+            }
         }
     }
 });
 
-export const { login } = loginSlice.actions;
+export const { login, logout } = loginSlice.actions;
 
 export default loginSlice.reducer;
