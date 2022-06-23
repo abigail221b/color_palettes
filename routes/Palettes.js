@@ -42,14 +42,14 @@ router.get("/popular/", (req, res) => {
         case FILTER.YEAR:
             query = query +
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE())
-                    ORDER BY num_likes DESC
+                    ORDER BY num_likes DESC, date_created ASC
                     LIMIT ${ offset }, ${ num_palettes }`;
             break;
         case FILTER.MONTH:
             query = query +
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) AND
                     MONTH(date_created) = MONTH(CURRENT_DATE)
-                    ORDER BY num_likes DESC
+                    ORDER BY num_likes DESC, date_created ASC
                     LIMIT ${ offset }, ${ num_palettes }`;
             break;
         case FILTER.WEEK:
@@ -57,13 +57,13 @@ router.get("/popular/", (req, res) => {
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE()) AND
                     MONTH(date_created) = MONTH(CURRENT_DATE()) AND
                     WEEK(date_created) = WEEK(CURRENT_DATE())
-                    ORDER BY num_likes DESC
+                    ORDER BY num_likes DESC, date_created ASC
                     LIMIT ${ offset }, ${ num_palettes }`;
             break;
         default:
             query = query +
                     `WHERE YEAR(date_created) = YEAR(CURRENT_DATE())
-                    ORDER BY num_likes DESC
+                    ORDER BY num_likes DESC, date_created ASC
                     LIMIT ${ offset }, ${ num_palettes }`;
     };
 
