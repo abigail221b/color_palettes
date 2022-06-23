@@ -22,10 +22,15 @@ export const likesSlice = createSlice({
             return {
                 palettes: action.payload
             }
+        },
+        clearPalettes: (state) => {
+            return {
+                palettes: []
+            }
         }
     }
 });
 
-export const { like, unlike, initalizePalettes } = likesSlice.actions;
+export const { like, unlike, initalizePalettes, clearPalettes } = likesSlice.actions;
 
 export default likesSlice.reducer;
