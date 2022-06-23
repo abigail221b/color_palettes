@@ -8,7 +8,7 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
     const [liked, setLiked] = useState(isLikedByUser);
     const [numLikes, setNumLikes] = useState(num_likes);
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector(state => state.login.value);
+    const { isLoggedIn, username } = useSelector(state => state.login);
 
     const colorPalette_style = {
         height: "235px",
