@@ -9,7 +9,7 @@ function NavBar() {
 
     const [isMenuExpanded, setIsMenuExpanded] = useState(false);
     const [isSmallMenuExpanded, setIsSmallMenuExpanded] = useState(false);
-    const { isLoggedIn } = useSelector(state => state.login);
+    const { isLoggedIn, username } = useSelector(state => state.login);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function NavBar() {
 
     const subMenu = (
         <div className="card" style={subMenu_style}>
-            <header>Hello!</header>
+            <header>Hello, { username }!</header>
             <footer style={{"display":"flex", "flexDirection":"column","gap":"15px"}}>
                 <Link to="create">Create</Link>
                 <Link to="likes">Likes</Link>
