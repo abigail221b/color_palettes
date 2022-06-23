@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import likesReducer from "./likesSlice.js";
-import loggedInReducer from "./loggedInSlice.js";
+import loginReducer from "./loginSlice.js";
 
 export const store = configureStore({
     reducer: {
         likes: likesReducer,
-        isLoggedIn: loggedInReducer
+        login: loginReducer
     }
 });
