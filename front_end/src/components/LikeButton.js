@@ -35,8 +35,8 @@ function LikeButton({ handleLike, numLikes, liked }) {
                 <article style={{ padding: "25px"}}>
                     <label htmlFor="modal_1" className="close">&times;</label>
                     <section className="content">
-                        <Link to="login"><span style={{ textDecoration: "underline"}}>Log in</span></Link> or&nbsp;
-                        <Link to="signup"><span style={{ textDecoration: "underline"}}>Signup</span></Link>
+                        <Link to="../login"><span style={{ textDecoration: "underline"}}>Log in</span></Link> or&nbsp;
+                        <Link to="../signup"><span style={{ textDecoration: "underline"}}>Signup</span></Link>
                         &nbsp;for an account
                     </section>
                 </article>
