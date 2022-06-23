@@ -8,7 +8,7 @@ function Collection() {
     const { isLoggedIn, username } = useSelector(state => state.login);
 
     useEffect(() => {
-        fetch("/palettes/user/demoUser121")
+        fetch(`/palettes/user/${ username }`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);

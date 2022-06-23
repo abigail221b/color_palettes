@@ -9,7 +9,7 @@ function Liked() {
     const { isLoggedIn, username } = useSelector(state => state.login);
 
     useEffect(() => {
-        fetch("/palettes/user/demoUser121/likes")
+        fetch(`/palettes/user/${ username }/likes`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);
