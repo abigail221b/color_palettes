@@ -15,7 +15,7 @@ function Popular() {
     const [filter, setFilter] = useState(FILTER.ALL_TIME);
     const [page, setPage] = useState(1);
     const likedPalettes = useSelector(state => state.likes.palettes);
-    const isLoggedIn = useSelector(state => state.isLoggedIn.value);
+    const isLoggedIn = useSelector(state => state.login.value);
 
     function handleChange(e) {
         switch(e.target.value) {

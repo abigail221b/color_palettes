@@ -7,7 +7,7 @@ function New() {
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
     const likedPalettes = useSelector(state => state.likes.palettes);
-    const isLoggedIn = useSelector(state => state.isLoggedIn.value);
+    const isLoggedIn = useSelector(state => state.login.value);
 
     useEffect(() => {
         fetch(`/palettes/new/?limit=15&page=${ page }`)
