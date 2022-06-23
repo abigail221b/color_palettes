@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/loginSlice";
+import { initalizePalettes } from "../redux/likesSlice.js";
 
 function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,7 +19,17 @@ function Login() {
             }
         })
         .then(res => res.json())
-        .then(res => console.log(res.msg));
+        .then(res => {
+            if(res.status === "ok") {
+                dispatch(login({ isLoggedIn: true, username: res.username }));
+
+                fetch(`/palettes/user/${ res.username }/likes`)
+                .then(res => res.json())
+                .then(palettes => {
+                    dispatch(initalizePalettes(palettes));
+                })
+            }
+        });
     }
 
     const form_style = {
