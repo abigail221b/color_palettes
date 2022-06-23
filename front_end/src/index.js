@@ -8,7 +8,8 @@ import Popular from "./pages/Popular";
 import New from "./pages/New";
 import Liked from "./pages/Likes";
 import Collection from "./pages/Collection";
-import SignUp from "./pages/SignUp"
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
 import { store } from "./redux/store";
 import { Provider, dispatch } from "react-redux";
@@ -25,6 +26,7 @@ ReactDOM.render(
                     <Route path="create" element={<Create />} />
                     <Route path="collection" element={<Collection />} />
                     <Route path="signup" element={<SignUp />} />
+                    <Route path="login" element={<Login />} />
                 </Route>
             </Routes>
         </BrowserRouter>
