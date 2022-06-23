@@ -70,6 +70,12 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
         else return `${ yearNow - year } ${ yearNow - year === 1? "year" : "years"} ago`;
     }
 
+    // Once user logs out, clear highlighted like buttons
+    useEffect(() => {
+        if(!isLoggedIn)
+            setLiked(false);
+    }, [isLoggedIn]);
+
     const handleLike = () => {
         if(isLoggedIn) {
             if(liked) {
