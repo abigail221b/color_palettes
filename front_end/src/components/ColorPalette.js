@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { like, unlike } from "../redux/likesSlice.js";
 import LikeButton from "./LikeButton";
+import TimeAgo from "timeago-react";
 
 function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser }) {
 
@@ -40,36 +41,6 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
         padding: "0 15px"
     };
 
-    const formatDate = (date) => {
-        const dateObj = new Date(date);
-        let year = dateObj.getFullYear();
-        let month = dateObj.getMonth();
-        let day = dateObj.getDate();
-        let hour = dateObj.getHours();
-        let minute = dateObj.getMinutes();
-        let second = dateObj.getSeconds();
-
-        const now = new Date();
-        let yearNow = now.getFullYear();
-        let monthNow = now.getMonth();
-        let dayNow = now.getDate();
-        let hourNow = now.getHours();
-        let minuteNow = now.getMinutes();
-        let secondNow = now.getSeconds();
-
-        if(yearNow - year === 0)
-            if(monthNow - month === 0)
-                if(dayNow - day === 0)
-                    if(hourNow - hour === 0)
-                        if(minuteNow - minute === 0)
-                            return "now";
-                        else return `${ minuteNow - minute } ${ minuteNow - minute === 1? "minute" : "minutes"} ago`;
-                    else return `${ hourNow - hour } ${ hourNow - hour === 1? "hour" : "hours"} ago`;
-                else return `${ dayNow - day } ${ dayNow - day === 1? "day" : "days"} ago`;
-            else return `${ monthNow - month } ${ monthNow - month === 1? "month" : "months"} ago`;
-        else return `${ yearNow - year } ${ yearNow - year === 1? "year" : "years"} ago`;
-    }
-
     // Once user logs out, clear highlighted like buttons
     useEffect(() => {
         if(!isLoggedIn)
@@ -103,7 +74,9 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
             <div className="info" style={ paletteInfo_style }>
                 <div>
                     <div style={{ "fontSize": "medium"}}>{ creator }</div>
-                    <div style={{ "fontSize": "small"}}>{ formatDate(date_created) }</div>
+                    <div style={{ "fontSize": "small"}}>
+                        <TimeAgo datetime={ date_created }/>
+                    </div>
                 </div>
                 <LikeButton handleLike={ handleLike } numLikes={ numLikes } liked={ liked }/>
             </div>
