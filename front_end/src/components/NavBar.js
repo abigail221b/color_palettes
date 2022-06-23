@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/loginSlice";
+import { clearPalettes } from "../redux/likesSlice";
 
 function NavBar() {
 
     const [isMenuExpanded, setIsMenuExpanded] = useState(false);
     const [isSmallMenuExpanded, setIsSmallMenuExpanded] = useState(false);
     const { isLoggedIn } = useSelector(state => state.login);
+    const dispatch = useDispatch();
 
     const subMenu_style = {
         "position" : "absolute",
@@ -22,6 +25,10 @@ function NavBar() {
                 <Link to="create">Create</Link>
                 <Link to="likes">Likes</Link>
                 <Link to="collection">Collection</Link>
+                <button onClick={() => {
+                    dispatch(logout());
+                    dispatch(clearPalettes());
+                }}>Logout</button>
             </footer>
         </div>
     );
@@ -35,6 +42,10 @@ function NavBar() {
                     <Link to="create">Create</Link>
                     <Link to="likes">Likes</Link>
                     <Link to="collection">Collection</Link>
+                    <button onClick={() => {
+                        dispatch(logout());
+                        dispatch(clearPalettes());
+                    }}>Logout</button>
                 </> :
                 <>
                     <Link to="popular">Popular</Link>
@@ -67,7 +78,6 @@ function NavBar() {
             <label for="bmenub" className="burger pseudo button">Menu</label>
 
             <div className="menu">
-
                 { isLoggedIn? loggedIn_menu : loggedOut_menu}
             </div>
         </nav>
