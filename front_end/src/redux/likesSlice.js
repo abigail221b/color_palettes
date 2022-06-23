@@ -20,7 +20,7 @@ export const likesSlice = createSlice({
         },
         initalizePalettes: (state, action) => {
             return {
-                palettes: action.payload;
+                palettes: action.payload
             }
         }
     }
