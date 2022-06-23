@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/loginSlice";
 import { initalizePalettes } from "../redux/likesSlice.js";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,6 +29,7 @@ function Login() {
                 .then(res => res.json())
                 .then(palettes => {
                     dispatch(initalizePalettes(palettes));
+                    navigate("../popular", { replace: true });
                 })
             }
         });

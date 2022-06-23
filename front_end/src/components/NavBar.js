@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/loginSlice";
 import { clearPalettes } from "../redux/likesSlice";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
 
@@ -10,6 +11,7 @@ function NavBar() {
     const [isSmallMenuExpanded, setIsSmallMenuExpanded] = useState(false);
     const { isLoggedIn } = useSelector(state => state.login);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const subMenu_style = {
         "position" : "absolute",
@@ -28,6 +30,7 @@ function NavBar() {
                 <button onClick={() => {
                     dispatch(logout());
                     dispatch(clearPalettes());
+                    navigate("../popular", { replace: true });
                 }}>Logout</button>
             </footer>
         </div>
@@ -45,6 +48,7 @@ function NavBar() {
                     <button onClick={() => {
                         dispatch(logout());
                         dispatch(clearPalettes());
+                        navigate("../popular", { replace: true });
                     }}>Logout</button>
                 </> :
                 <>
