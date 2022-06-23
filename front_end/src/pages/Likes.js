@@ -6,10 +6,10 @@ function Liked() {
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
     const likedPalettes = useSelector(state => state.likes.palettes);
-    const isLoggedIn = useSelector(state => state.isLoggedIn.value);
+    const { isLoggedIn, username } = useSelector(state => state.login);
 
     useEffect(() => {
-        fetch("/palettes/user/demoUser121/likes")
+        fetch(`/palettes/user/${ username }/likes`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);

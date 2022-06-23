@@ -9,17 +9,28 @@ export const likesSlice = createSlice({
     initialState,
     reducers: {
         like: (state, action) => {
-            state.palettes = [...state.palettes, action.payload]
+            return {
+                palettes: [...state.palettes, action.payload]
+            }
         },
         unlike: (state, action) => {
-            state.palettes = state.palettes.filter(palette => palette.color0 !== action.payload.color0 || palette.color1 !== action.payload.color1 || palette.color2 !== action.payload.color2 || palette.color3 !== action.payload.color3 || palette.color4 !== action.payload.color4)
+            return {
+                palettes: state.palettes.filter(palette => palette.color0 !== action.payload.color0 || palette.color1 !== action.payload.color1 || palette.color2 !== action.payload.color2 || palette.color3 !== action.payload.color3 || palette.color4 !== action.payload.color4)
+            }
         },
         initalizePalettes: (state, action) => {
-            state.palettes = action.payload;
+            return {
+                palettes: action.payload
+            }
+        },
+        clearPalettes: (state) => {
+            return {
+                palettes: []
+            }
         }
     }
 });
 
-export const { like, unlike, initalizePalettes } = likesSlice.actions;
+export const { like, unlike, initalizePalettes, clearPalettes } = likesSlice.actions;
 
 export default likesSlice.reducer;

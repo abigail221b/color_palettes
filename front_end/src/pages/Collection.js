@@ -5,10 +5,10 @@ import ColorPalette from "../components/ColorPalette.js";
 function Collection() {
     const [palettes, setPalettes] = useState([]);
     const likedPalettes = useSelector(state => state.likes.palettes);
-    const isLoggedIn = useSelector(state => state.isLoggedIn.value)
+    const { isLoggedIn, username } = useSelector(state => state.login);
 
     useEffect(() => {
-        fetch("/palettes/user/demoUser121")
+        fetch(`/palettes/user/${ username }`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);

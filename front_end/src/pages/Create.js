@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Create() {
     const [colors, setColors] = useState(["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]);
+    const { username } = useSelector(state => state.login);
 
     function handleColorChange(e, id) {
         let newColors = colors.map( (color, index) => {
@@ -14,7 +16,7 @@ function Create() {
     function handleSubmit(e) {
         fetch("/palettes", {
             method: "POST",
-            body: JSON.stringify({ username: "demoUser121", colors: colors }),
+            body: JSON.stringify({ username: username, colors: colors }),
             headers: {
                 "Content-Type": "application/json"
             }

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 function LikeButton({ handleLike, numLikes, liked }) {
 
-    const isLoggedIn = useSelector(state => state.isLoggedIn.value);
+    const { isLoggedIn } = useSelector(state => state.login);
 
     if(isLoggedIn) {
         return (
