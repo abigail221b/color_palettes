@@ -140,14 +140,18 @@ router.get("/user/:username/likes", (req, res) => {
 
 // Get color palettes created by a specific user
 router.get("/user/:username", (req, res) => {
-    pool.query(`SELECT *
-                FROM user_creates_palette ucp LEFT JOIN color_palette p ON ucp.color0=p.color0 AND ucp.color1=p.color1 AND ucp.color2=p.color2 AND ucp.color3=p.color3 AND ucp.color4=p.color4
-                WHERE username='${ req.params.username }'
+    pool.query(`SELECT p.color0, p.color1, p.color2, p.color3, p.color4, p.username, color_palette.num_likes, color_palette.date_created
+                FROM (
+                	SELECT *
+                    FROM user_creates_palette
+                    WHERE username='${ req.params.username }'
+                ) AS p
+                NATURAL JOIN color_palette
                 ORDER BY date_created DESC`,
-        (err, rows) => {
-            if (err) throw err;
-            res.send(rows);
-        });
+    (err, rows) => {
+        if (err) throw err;
+        res.send(rows);
+    });
 });
 
 module.exports = router;
