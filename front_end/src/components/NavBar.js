@@ -67,8 +67,8 @@ function NavBar() {
         <>
             <Link to="popular">Popular</Link>
             <Link to="new">New</Link>
-            <span class="button" style={{ "backgroundColor": "yellow" }}><Link to="login">Log in</Link></span>
-            <span class="button" style={{ "backgroundColor": "yellow" }}><Link to="signup">Sign up</Link></span>
+            <Link to="login"><span class="button" style={{ "backgroundColor": "yellow" }}>Log in</span></Link>
+            <Link to="signup"><span class="button" style={{ "backgroundColor": "yellow" }}>Sign up</span></Link>
         </>
     );
 
