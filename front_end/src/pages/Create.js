@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Create() {
     const [colors, setColors] = useState(["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]);
+    const { username } = useSelector(state => state.login);
 
     function handleColorChange(e, id) {
         let newColors = colors.map( (color, index) => {
