@@ -11,11 +11,13 @@ function App() {
     // Fetch user likes from database save to redux store
     const dispatch = useDispatch();
     useEffect(() => {
-        fetch("/palettes/user/demoUser121/likes")
-        .then(res => res.json())
-        .then(palettes => {
-            dispatch(initalizePalettes(palettes));
-        })
+        if(isLoggedIn) {
+            fetch(`/palettes/user/${ username }/likes`)
+            .then(res => res.json())
+            .then(palettes => {
+                dispatch(initalizePalettes(palettes));
+            })
+        }
     }, []);
 
     return (

@@ -16,7 +16,7 @@ function Create() {
     function handleSubmit(e) {
         fetch("/palettes", {
             method: "POST",
-            body: JSON.stringify({ username: "demoUser121", colors: colors }),
+            body: JSON.stringify({ username: username, colors: colors }),
             headers: {
                 "Content-Type": "application/json"
             }
