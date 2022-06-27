@@ -5,6 +5,7 @@ const palettesRouter = require("./routes/Palettes.js");
 const userRouter = require("./routes/User.js");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 // Middleware
 app.use(express.json());
