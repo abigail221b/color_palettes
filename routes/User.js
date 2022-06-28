@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../database_pool.js");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 router.post("/signup", (req, res) => {
     // Determine if username exists in database
@@ -32,6 +33,8 @@ router.post("/login", (req, res) => {
             const user = result[0];
             bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
                 if(passwordMatch) {
+                    const token = jwt.sign({ username: user.username }, process.env.ACCESS_TOKEN_SECRET);
+                    res.cookie("token", token, { httpOnly: true });
                     res.status(200).send({ username: user.username });
                 } else {
                     res.status(401).send({ msg: "Login error" });
