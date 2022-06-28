@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const authenticateToken = (req, res, next) => {
     jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if(err) return res.sendStatus(403);
-        req.user = decoded.username;
+        req.user = { username: decoded.username };
         next();
     });
 }
@@ -83,12 +83,12 @@ router.get("/popular/", (req, res) => {
 });
 
 // Create a new Color Palette
-router.post("/", (req, res) => {
+router.post("/", authenticateToken, (req, res) => {
     let colors = req.body.colors.map(color => color.replace("#", ""));
     pool.query(`INSERT INTO color_palette (color0, color1, color2, color3, color4, date_created, num_likes)
                 VALUES ('${ colors[0] }', '${ colors[1] }', '${ colors[2] }', '${ colors[3] }', '${ colors[4] }', CURRENT_TIMESTAMP(), 0);
                 INSERT INTO user_creates_palette
-                VALUES ('${ req.body.username }','${ colors[0] }', '${ colors[1] }', '${ colors[2] }', '${ colors[3] }', '${ colors[4] }')`, (err, rows) => {
+                VALUES ('${ req.user.username }','${ colors[0] }', '${ colors[1] }', '${ colors[2] }', '${ colors[3] }', '${ colors[4] }')`, (err, rows) => {
         if (err) throw err;
         res.send(rows);
     });
@@ -113,10 +113,10 @@ router.get("/:color0/:color1/:color2/:color3/:color4", (req, res) => {
     Handle like and unlike by a specific user.
     ex. /palettes/:color0/:color1/:color2/:color3/:color4/?username=demoUser121&like=true
 */
-router.put("/:color0/:color1/:color2/:color3/:color4/", (req, res) => {
+router.put("/:color0/:color1/:color2/:color3/:color4/", authenticateToken, (req, res) => {
     if(req.query.like === "true") {
         pool.query(`INSERT INTO user_likes_palette
-                    VALUES ('${req.query.username}', '${req.params.color0}', '${req.params.color1}', '${req.params.color2}', '${req.params.color3}', '${req.params.color4}');
+                    VALUES ('${req.user.username}', '${req.params.color0}', '${req.params.color1}', '${req.params.color2}', '${req.params.color3}', '${req.params.color4}');
                     UPDATE color_palette
                     SET num_likes = num_likes+1
                     WHERE color0='${req.params.color0}' AND color1='${req.params.color1}' AND color2='${req.params.color2}' AND color3='${req.params.color3}' AND color4='${req.params.color4}'`,
@@ -125,7 +125,7 @@ router.put("/:color0/:color1/:color2/:color3/:color4/", (req, res) => {
                     res.send(rows);
                 });
     } else {
-        pool.query(`DELETE FROM user_likes_palette WHERE username='${req.query.username}' AND color0='${req.params.color0}'AND color1='${req.params.color1}'AND color2='${req.params.color2}'AND color3='${req.params.color3}'AND color4='${req.params.color4}';
+        pool.query(`DELETE FROM user_likes_palette WHERE username='${req.user.username}' AND color0='${req.params.color0}'AND color1='${req.params.color1}'AND color2='${req.params.color2}'AND color3='${req.params.color3}'AND color4='${req.params.color4}';
                     UPDATE color_palette
                     SET num_likes = num_likes - 1
                     WHERE color0='${req.params.color0}' AND color1='${req.params.color1}' AND color2='${req.params.color2}' AND color3='${req.params.color3}' AND color4='${req.params.color4}'`,
@@ -137,12 +137,12 @@ router.put("/:color0/:color1/:color2/:color3/:color4/", (req, res) => {
 });
 
 // Get color palettes liked by a specific user
-router.get("/user/:username/likes", (req, res) => {
+router.get("/likes", authenticateToken, (req, res) => {
     pool.query(`SELECT p.color0, p.color1, p.color2, p.color3, p.color4, user_creates_palette.username, color_palette.date_created, color_palette.num_likes
                 FROM (
-                	SELECT color0, color1, color2, color3, color4
+                    SELECT color0, color1, color2, color3, color4
                     FROM user_likes_palette
-                    WHERE username='${ req.params.username }'
+                    WHERE username='${ req.user.username }'
                 ) AS p
                 NATURAL JOIN user_creates_palette
                 NATURAL JOIN color_palette`,
