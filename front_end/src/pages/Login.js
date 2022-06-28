@@ -10,6 +10,7 @@ function Login() {
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [msg, setMsg] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -20,19 +21,22 @@ function Login() {
                 "Content-Type": "application/json"
             }
         })
-        .then(res => res.json())
         .then(res => {
-            if(res.status === "ok") {
-                dispatch(login({ isLoggedIn: true, username: res.username }));
+            if(res.status === 200) {
+                res.json().then(res => {
+                    dispatch(login({ isLoggedIn: true, username: res.username }));
 
-                fetch(`/palettes/user/${ res.username }/likes`)
-                .then(res => res.json())
-                .then(palettes => {
-                    dispatch(initalizePalettes(palettes));
-                    navigate("../popular", { replace: true });
-                })
+                    fetch(`/palettes/user/${ res.username }/likes`)
+                    .then(res => res.json())
+                    .then(palettes => {
+                        dispatch(initalizePalettes(palettes));
+                        navigate("../popular", { replace: true });
+                    });
+                });
+            } else {
+                res.json().then(res => setMsg(res.msg));
             }
-        });
+        })
     }
 
     const form_style = {
@@ -52,6 +56,7 @@ function Login() {
                     <button type="submit">Login</button>
                 </form>
             </div>
+            { msg }
         </div>
     );
 }

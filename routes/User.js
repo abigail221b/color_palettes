@@ -32,13 +32,13 @@ router.post("/login", (req, res) => {
             const user = result[0];
             bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
                 if(passwordMatch) {
-                    res.send({ status: "ok", msg: "Login Successful", username: user.username});
+                    res.status(200).send({ username: user.username });
                 } else {
-                    res.send({ status: "fail", msg: "Login error.", username: null });
+                    res.status(401).send({ msg: "Login error" });
                 }
             })
         } else {
-            res.send({ status: "fail", msg: "Login error.", username: null });
+            res.status(401).send({ msg: "Login error" });
         }
     });
 });
