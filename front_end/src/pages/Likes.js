@@ -16,7 +16,7 @@ function Liked() {
     }, [isLoggedIn]);
 
     useEffect(() => {
-        fetch(`/palettes/user/${ username }/likes`)
+        fetch(`/palettes/likes`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);

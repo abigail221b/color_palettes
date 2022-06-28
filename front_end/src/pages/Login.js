@@ -26,7 +26,7 @@ function Login() {
                 res.json().then(res => {
                     dispatch(login({ isLoggedIn: true, username: res.username }));
 
-                    fetch(`/palettes/user/${ res.username }/likes`)
+                    fetch(`/palettes/likes`)
                     .then(res => res.json())
                     .then(palettes => {
                         dispatch(initalizePalettes(palettes));
