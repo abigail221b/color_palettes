@@ -1,6 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../database_pool.js");
+const jwt = require("jsonwebtoken");
+
+const authenticateToken = (req, res, next) => {
+    jwt.verify(req.cookies.token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if(err) return res.sendStatus(403);
+        req.user = decoded.username;
+        next();
+    });
+}
 
 /* GET new color palettes */
 router.get("/new", (req, res) => {
