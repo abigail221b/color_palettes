@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/loginSlice";
-import { clearPalettes } from "../redux/likesSlice";
+import { logout } from "../../redux/loginSlice";
+import { clearPalettes } from "../../redux/likesSlice";
 import { useNavigate } from "react-router-dom";
+import SubMenu from "../SubMenu/SubMenu";
 
 function NavBar() {
 
@@ -12,29 +13,6 @@ function NavBar() {
     const { isLoggedIn, username } = useSelector(state => state.login);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const subMenu_style = {
-        "position" : "absolute",
-        "right" : "0",
-        "minWidth": "200px",
-        "padding": "10px"
-    };
-
-    const subMenu = (
-        <div className="card" style={subMenu_style}>
-            <header>Hello, { username }!</header>
-            <footer style={{"display":"flex", "flexDirection":"column","gap":"15px"}}>
-                <Link to="create">Create</Link>
-                <Link to="likes">Likes</Link>
-                <Link to="collection">Collection</Link>
-                <button onClick={() => {
-                    dispatch(logout());
-                    dispatch(clearPalettes());
-                    navigate("../popular", { replace: true });
-                }}>Logout</button>
-            </footer>
-        </div>
-    );
 
     const loggedIn_menu = (
         <>
@@ -57,7 +35,7 @@ function NavBar() {
                     <button style={{"backgroundColor":"yellow"}} onClick={() => setIsSmallMenuExpanded(isSmallMenuExpanded => !isSmallMenuExpanded)}>
                         submenu
                     </button>
-                    {isSmallMenuExpanded? subMenu : ""}
+                    {isSmallMenuExpanded? <SubMenu /> : ""}
                 </>
             }
         </>
