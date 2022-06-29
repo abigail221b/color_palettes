@@ -13,9 +13,8 @@ function SubMenu() {
     const navigate = useNavigate();
 
     return (
-        <div className={ classnames(style.subMenu, "card") }>
+        <div className={ style.subMenu }>
             <header>Hello, { username }!</header>
-            <footer className={ classnames(style.footer) }>
                 <div><Link to="create">Create</Link></div>
                 <div><Link to="likes">Likes</Link></div>
                 <div><Link to="collection">Collection</Link></div>
@@ -24,7 +23,6 @@ function SubMenu() {
                     dispatch(clearPalettes());
                     navigate("../popular", { replace: true });
                 }}>Logout</button>
-            </footer>
         </div>
     );
 }
