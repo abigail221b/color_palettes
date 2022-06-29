@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 function Create() {
     const [colors, setColors] = useState(["#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF", "#FFFFFF"]);
     const { username } = useSelector(state => state.login);
     const { isLoggedIn } = useSelector(state => state.login);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if(!isLoggedIn) {
-            navigate("../login", { replace: true });
-        }
-    }, [isLoggedIn]);
 
     function handleColorChange(e, id) {
         let newColors = colors.map( (color, index) => {
@@ -62,6 +56,10 @@ function Create() {
         backgroundColor: "yellow",
         marginTop: "15px"
     };
+
+    if(!isLoggedIn) {
+        return <Navigate to="../login" />;
+    }
 
     return (
         <div className="Create" style={ create_form_style }>

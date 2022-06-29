@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import ColorPalette from "../components/ColorPalette/ColorPalette.js";
+import { Navigate } from "react-router-dom";
 
 function Liked() {
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
     const likedPalettes = useSelector(state => state.likes.palettes);
     const { isLoggedIn, username } = useSelector(state => state.login);
-    const navigate = useNavigate();
-    useEffect(() => {
-        if(!isLoggedIn) {
-            navigate("../login", { replace: true });
-        }
-    }, [isLoggedIn]);
 
     useEffect(() => {
         fetch(`/palettes/likes`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
     }, []);
+
+    if(!isLoggedIn) {
+        return <Navigate to="../login" />
+    }
 
     return (
         <div className="Liked" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
