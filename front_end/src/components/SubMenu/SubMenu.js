@@ -16,9 +16,9 @@ function SubMenu() {
         <div className={ classnames(style.subMenu, "card") }>
             <header>Hello, { username }!</header>
             <footer className={ classnames(style.footer) }>
-                <div><Link to="create">Create</Link></div>
-                <div><Link to="likes">Likes</Link></div>
-                <div><Link to="collection">Collection</Link></div>
+                <Link to="create">Create</Link>
+                <Link to="likes">Likes</Link>
+                <Link to="collection">Collection</Link>
                 <button onClick={() => {
                     dispatch(logout());
                     dispatch(clearPalettes());
