@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ColorPalette from "../components/ColorPalette.js";
+import ColorPalette from "../components/ColorPalette/ColorPalette.js";
 
 function New() {
 

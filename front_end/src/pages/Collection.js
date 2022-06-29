@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ColorPalette from "../components/ColorPalette.js";
+import ColorPalette from "../components/ColorPalette/ColorPalette.js";
 
 function Collection() {
     const [palettes, setPalettes] = useState([]);

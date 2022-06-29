@@ -1,4 +1,4 @@
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import { useEffect } from "react";
 import { initalizePalettes } from "./redux/likesSlice.js";
 import { useDispatch, useSelector } from "react-redux";

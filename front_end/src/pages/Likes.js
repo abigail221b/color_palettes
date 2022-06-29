@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import ColorPalette from "../components/ColorPalette.js";
 import { useNavigate } from "react-router-dom";
+import ColorPalette from "../components/ColorPalette/ColorPalette.js";
 
 function Liked() {
     const [palettes, setPalettes] = useState([]);
