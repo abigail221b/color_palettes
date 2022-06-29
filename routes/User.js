@@ -28,7 +28,6 @@ router.post("/signup", (req, res) => {
 
 router.post("/login", (req, res) => {
     pool.query("SELECT * from user WHERE username=?", [req.body.username], (err, result) => {
-        const user = result[0];
         if(result.length > 0) {
             const user = result[0];
             bcrypt.compare(req.body.password, user.password, (err, passwordMatch) => {
