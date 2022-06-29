@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { like, unlike } from "../redux/likesSlice.js";
-import LikeButton from "./LikeButton";
+import { like, unlike } from "../../redux/likesSlice.js";
+import style from "./ColorPalette.module.css";
+import LikeButton from "../LikeButton/LikeButton";
 import TimeAgo from "timeago-react";
+import classnames from "classnames";
 
 function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser }) {
 
@@ -10,36 +12,6 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
     const [numLikes, setNumLikes] = useState(num_likes);
     const dispatch = useDispatch();
     const { isLoggedIn, username } = useSelector(state => state.login);
-
-    const colorPalette_style = {
-        height: "235px",
-        width: "100%",
-        padding: 0,
-        display: "flex",
-        flexDirection: "column",
-        boxShadow: "0px 2px 2px 0px rgba(0,0,0,0.14) , 0px 3px 1px -2px rgba(0,0,0,0.12) , 0px 1px 5px 0px rgba(0,0,0,0.2) ",
-        border: "none"
-    };
-
-    const colorView_style = {
-        width: "100%",
-        height: "100%",
-        display: "flex"
-    };
-
-    const colorBlock_style = {
-        width: "100%",
-        height: "100%"
-    };
-
-    const paletteInfo_style = {
-        width: "100%",
-        height: "75px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "0 15px"
-    };
 
     // Once user logs out, clear highlighted like buttons
     useEffect(() => {
@@ -67,11 +39,11 @@ function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser 
     }
 
     return (
-        <div className="ColorPalette card" style={ colorPalette_style }>
-            <div className="colorView" style={ colorView_style }>
-                { colors.map(color => <div style={{ ...colorBlock_style, backgroundColor:`#${color}` }}></div>) }
+        <div className={ classnames(style.colorPalette, "card") }>
+            <div className={ style.colorsView } >
+                { colors.map(color => <div className={ style.colorBlock } style={{ backgroundColor:`#${color}` }}></div>) }
             </div>
-            <div className="info" style={ paletteInfo_style }>
+            <div className={ style.paletteDetail }>
                 <div>
                     <div style={{ "fontSize": "medium"}}>{ creator }</div>
                     <div style={{ "fontSize": "small"}}>
