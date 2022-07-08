@@ -47,7 +47,7 @@ function ColorPalette({ creator, handleDelete, colors, date_created, num_likes, 
                 <div>
                     <div style={{ "fontSize": "medium"}}>{ creator }</div>
                     <div style={{ "fontSize": "small"}}>
-                        <TimeAgo datetime={ date_created }/>
+                        <TimeAgo datetime={ date_created } live={ false }/>
                     </div>
                 </div>
                 <LikeButton handleLike={ handleLike } numLikes={ numLikes } liked={ liked }/>
