@@ -15,14 +15,14 @@ function SubMenu() {
     return (
         <div className={ style.subMenu }>
             <header>Hello, { username }!</header>
-                <div><Link to="create">Create</Link></div>
-                <div><Link to="likes">Likes</Link></div>
-                <div><Link to={`/palettes/user/${ username }`}>Collection</Link></div>
-                <button onClick={() => {
-                    dispatch(logout());
-                    dispatch(clearPalettes());
-                    navigate("../popular", { replace: true });
-                }}>Logout</button>
+            <div><Link to="create">Create</Link></div>
+            <div><Link to="likes">Likes</Link></div>
+            <div><Link to={`/palettes/user/${ username }`}>Collection</Link></div>
+            <button onClick={() => {
+                dispatch(logout());
+                dispatch(clearPalettes());
+                navigate("../popular", { replace: true });
+            }}>Logout</button>
         </div>
     );
 }
