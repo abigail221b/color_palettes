@@ -1,24 +1,28 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link, useParams } from "react-router-dom";
 import ColorPalette from "../components/ColorPalette/ColorPalette.js";
 
 function Collection() {
     const [palettes, setPalettes] = useState([]);
     const likedPalettes = useSelector(state => state.likes.palettes);
     const { isLoggedIn, username } = useSelector(state => state.login);
+    const { usernameParam } = useParams();
 
     useEffect(() => {
-        fetch(`/palettes/user/${ username }`)
+        setPalettes([]);
+        fetch(`/palettes/user/${ usernameParam }`)
         .then(res => res.json())
         .then(palettes => setPalettes(palettes));
-    }, []);
+    }, [usernameParam]);
 
     }
 
+    const usernameDisplay = (usernameParam===username)? "My" : usernameParam+"'s";
+
     return (
         <div className="Collection" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
-            <h1>My Collection</h1>
+            <h1>{ usernameDisplay } Collection</h1>
             <div className="flex one two-500 three-700 four-1000">
                 {palettes.map(palette => <div style={{ padding:"10px" }}>
                                             <ColorPalette
