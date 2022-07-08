@@ -14,8 +14,6 @@ function Collection() {
         .then(palettes => setPalettes(palettes));
     }, []);
 
-    if(!isLoggedIn) {
-        return <Navigate to="../login" />
     }
 
     return (
