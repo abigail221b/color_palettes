@@ -4,16 +4,9 @@ import ColorPalette from "../components/ColorPalette/ColorPalette.js";
 import { Navigate } from "react-router-dom";
 
 function Liked() {
-    const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
     const likedPalettes = useSelector(state => state.likes.palettes);
     const { isLoggedIn, username } = useSelector(state => state.login);
-
-    useEffect(() => {
-        fetch(`/palettes/likes`)
-        .then(res => res.json())
-        .then(palettes => setPalettes(palettes));
-    }, []);
 
     if(!isLoggedIn) {
         return <Navigate to="../login" />
@@ -23,8 +16,9 @@ function Liked() {
         <div className="Liked" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
             <h1>Liked Color Palettes</h1>
             <div className="flex one two-500 three-700 four-1000">
-                {palettes.map(palette => <div style={{ padding:"10px" }}>
+                {likedPalettes.map(palette => <div style={{ padding:"10px" }}>
                                             <ColorPalette
+                                                key={ palette.color0 + palette.color1 + palette.color2 + palette.color3 + palette.color4 }
                                                 creator={ palette.username }
                                                 colors={[palette.color0, palette.color1, palette.color2, palette.color3, palette.color4]}
                                                 date_created = { palette.date_created}
