@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { like, unlike } from "../../redux/likesSlice.js";
+import { Link } from "react-router-dom";
 import style from "./ColorPalette.module.css";
 import LikeButton from "../LikeButton/LikeButton";
 import TimeAgo from "timeago-react";
@@ -45,7 +46,7 @@ function ColorPalette({ creator, handleDelete, colors, date_created, num_likes, 
             </div>
             <div className={ style.paletteDetail }>
                 <div>
-                    <div style={{ "fontSize": "medium"}}>{ creator }</div>
+                    <div style={{ "fontSize": "medium", textDecoration: "underline"}}><Link to={`/palettes/user/${ creator }`}>{ creator }</Link></div>
                     <div style={{ "fontSize": "small"}}>
                         <TimeAgo datetime={ date_created } live={ false }/>
                     </div>
