@@ -24,9 +24,9 @@ ReactDOM.render(
                     <Route path="new" element={<New />} />
                     <Route path="likes" element={<Liked />} />
                     <Route path="create" element={<Create />} />
-                    <Route path="collection" element={<Collection />} />
                     <Route path="signup" element={<SignUp />} />
                     <Route path="login" element={<Login />} />
+                    <Route path="palettes/user/:usernameParam" element={<Collection />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -22,7 +22,7 @@ function NavBar() {
                     <Link to="new">New</Link>
                     <Link to="create">Create</Link>
                     <Link to="likes">Likes</Link>
-                    <Link to="collection">Collection</Link>
+                    <Link to={`/palettes/user/${ username }`}>Collection</Link>
                     <button onClick={() => {
                         dispatch(logout());
                         dispatch(clearPalettes());

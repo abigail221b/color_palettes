@@ -17,7 +17,7 @@ function SubMenu() {
             <header>Hello, { username }!</header>
                 <div><Link to="create">Create</Link></div>
                 <div><Link to="likes">Likes</Link></div>
-                <div><Link to="collection">Collection</Link></div>
+                <div><Link to={`/palettes/user/${ username }`}>Collection</Link></div>
                 <button onClick={() => {
                     dispatch(logout());
                     dispatch(clearPalettes());
