@@ -16,6 +16,13 @@ function Collection() {
         .then(palettes => setPalettes(palettes));
     }, [usernameParam]);
 
+    const handleDelete = (color0, color1, color2, color3, color4) => {
+        fetch(`/palettes/${color0}/${color1}/${color2}/${color3}/${color4}`, {
+            method: "DELETE"
+        });
+        setPalettes(palettes.filter(palette => {
+            return palette.color0!==color0 || palette.color1!==color1 || palette.color2!==color2 || palette.color3!==color3 || palette.color4!==color4
+        }));
     }
 
     const usernameDisplay = (usernameParam===username)? "My" : usernameParam+"'s";
