@@ -27,13 +27,13 @@ function ColorPalette({ creator, handleDelete, colors, date_created, num_likes, 
                 fetch(`/palettes/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/?username=${ username }&like=false`, {
                     method: "PUT"
                 });
-                dispatch(unlike({ color0: colors[0], color1: colors[1], color2: colors[2], color3: colors[3], color4: colors[4] }));
+                dispatch(unlike({ color0: colors[0], color1: colors[1], color2: colors[2], color3: colors[3], color4: colors[4], date_created: date_created, num_likes: numLikes, username: creator }));
             } else {
                 setNumLikes(numLikes => numLikes+1);
                 fetch(`/palettes/${colors[0]}/${colors[1]}/${colors[2]}/${colors[3]}/${colors[4]}/?username=${ username }&like=true`, {
                     method: "PUT"
                 });
-                dispatch(like({ color0: colors[0], color1: colors[1], color2: colors[2], color3: colors[3], color4: colors[4] }));
+                dispatch(like({ color0: colors[0], color1: colors[1], color2: colors[2], color3: colors[3], color4: colors[4], date_created: date_created, num_likes: numLikes, username: creator }));
             }
             setLiked(!liked);
         }
