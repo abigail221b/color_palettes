@@ -6,7 +6,7 @@ import LikeButton from "../LikeButton/LikeButton";
 import TimeAgo from "timeago-react";
 import classnames from "classnames";
 
-function ColorPalette({ creator, colors, date_created, num_likes, isLikedByUser }) {
+function ColorPalette({ creator, handleDelete, colors, date_created, num_likes, isLikedByUser, isCreatedByUser }) {
 
     const [liked, setLiked] = useState(isLikedByUser);
     const [numLikes, setNumLikes] = useState(num_likes);
