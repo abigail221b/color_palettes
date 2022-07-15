@@ -5,6 +5,8 @@ import { logout } from "../../redux/loginSlice";
 import { clearPalettes } from "../../redux/likesSlice";
 import { useNavigate } from "react-router-dom";
 import SubMenu from "../SubMenu/SubMenu";
+import style from "./NavBar.module.css";
+import classnames from "classnames";
 
 function NavBar() {
 
@@ -23,7 +25,7 @@ function NavBar() {
                     <Link to="create">Create</Link>
                     <Link to="likes">Likes</Link>
                     <Link to={`/palettes/user/${ username }`}>Collection</Link>
-                    <button onClick={() => {
+                    <button className={ style.button } onClick={() => {
                         dispatch(logout());
                         dispatch(clearPalettes());
                         navigate("../popular", { replace: true });
@@ -45,8 +47,8 @@ function NavBar() {
         <>
             <Link to="popular">Popular</Link>
             <Link to="new">New</Link>
-            <Link to="login"><span class="button" style={{ "backgroundColor": "yellow" }}>Log in</span></Link>
-            <Link to="signup"><span class="button" style={{ "backgroundColor": "yellow" }}>Sign up</span></Link>
+            <Link to="login"><span className= { classnames(style.btn, "button") }>Log in</span></Link>
+            <Link to="signup"><span className={ classnames(style.btn, "button") }>Sign up</span></Link>
         </>
     );
 
