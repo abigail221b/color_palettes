@@ -14,11 +14,6 @@
     display: flex;
 }
 
-.colorBlock {
-    width: 100%;
-    height: 100%;
-}
-
 .paletteDetail {
     width: 100%;
     height: 75px;
