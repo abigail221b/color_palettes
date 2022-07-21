@@ -48,11 +48,10 @@ function ColorPalette({ creator, handleDelete, colors, date_created, num_likes, 
                     <label className={ style.colorLabel } style={{ width: focus===index? "150%" : "100%", backgroundColor: `#${color}`}}
                            onMouseEnter={() => { setFocus(index); setLabelText(`#${color}`) }}
                            onMouseLeave={() => { setFocus(null); setLabelText(null) }}
-                           onClick={() => navigator.clipboard.writeText(color).then(res => setLabelText("copied!"))}>{focus===index? labelText : null}</label>) }
-
-                {isCreatedByUser? <span style={{ cursor: "pointer", position: "absolute", top: "0", right: "0", margin: "5px"}} onClick={ () => handleDelete(colors[0],colors[1],colors[2],colors[3],colors[4]) }>
-                    <div><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></div>
-                </span> : null}
+                           onClick={() => navigator.clipboard.writeText(color).then(res => setLabelText("copied!"))}>
+                       {focus===index? labelText : null}
+                    </label>)
+                }
             </div>
             {isCreatedByUser? <span style={{ cursor: "pointer", position: "absolute", top: "0", right: "0", margin: "5px"}} onClick={ () => handleDelete(colors[0],colors[1],colors[2],colors[3],colors[4]) }>
                 <div><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></div>
