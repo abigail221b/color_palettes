@@ -40,7 +40,7 @@ function Popular() {
             fetch(`/palettes/popular/?filter=${filter}&limit=${ limit }&page=${ page }`)
             .then(res => res.json())
             .then(data => {
-                setFetchPalettes(data.length > limit);
+                setFetchPalettes(data.length === limit);
                 if(page === 1)
                     setPalettes(data);
                 else
