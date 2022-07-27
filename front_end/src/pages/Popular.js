@@ -40,12 +40,19 @@ function Popular() {
             fetch(`/palettes/popular/?filter=${filter}&limit=${ limit }&page=${ page }`)
             .then(res => res.json())
             .then(data => {
-                if(data.length < limit) setFetchPalettes(false);
-                setPalettes(palettes => [...palettes, ...data]);
+                setFetchPalettes(data.length > limit);
+                if(page === 1)
+                    setPalettes(data);
+                else
+                    setPalettes(palettes => [...palettes, ...data]);
             });
         }
+    }, [filter, page, fetchPalettes]);
 
-    }, [filter, page]);
+    useEffect(() => {
+        setPage(1);
+        setFetchPalettes(true);
+    }, [filter]);
 
     const handleScroll = () => {
         if((window.scrollY + document.body.clientHeight) >= document.body.scrollHeight)
