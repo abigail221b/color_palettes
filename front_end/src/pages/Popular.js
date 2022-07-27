@@ -13,6 +13,8 @@ function Popular() {
 
     const [palettes, setPalettes] = useState([]);
     const [filter, setFilter] = useState(FILTER.ALL_TIME);
+    const [limit, setLimit] = useState(15);
+    const [fetchPalettes, setFetchPalettes] = useState(true);
     const [page, setPage] = useState(1);
     const likedPalettes = useSelector(state => state.likes.palettes);
     const { isLoggedIn } = useSelector(state => state.login);
@@ -34,10 +36,27 @@ function Popular() {
     }
 
     useEffect(() => {
-        fetch(`/palettes/popular/?filter=${filter}&limit=15&page=${ page }`)
-        .then(res => res.json())
-        .then(data => setPalettes(data));
+        if(fetchPalettes) {
+            fetch(`/palettes/popular/?filter=${filter}&limit=${ limit }&page=${ page }`)
+            .then(res => res.json())
+            .then(data => {
+                if(data.length < limit) setFetchPalettes(false);
+                setPalettes(palettes => [...palettes, ...data]);
+            });
+        }
+
     }, [filter, page]);
+
+    const handleScroll = () => {
+        if((window.scrollY + document.body.clientHeight) >= document.body.scrollHeight)
+            setPage(page => page + 1);
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
         <div className="Popular" style={{  maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>

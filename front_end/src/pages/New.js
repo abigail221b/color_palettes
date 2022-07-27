@@ -6,17 +6,32 @@ function New() {
 
     const [palettes, setPalettes] = useState([]);
     const [page, setPage] = useState(1);
+    const [fetchPalettes, setFetchPalettes] = useState(true);
+    const [limit, setLimit] = useState(15);
     const likedPalettes = useSelector(state => state.likes.palettes);
     const { isLoggedIn, username } = useSelector(state => state.login);
 
     useEffect(() => {
-        fetch(`/palettes/new/?limit=15&page=${ page }`)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setPalettes(data);
-        });
+        if(fetchPalettes) {
+            fetch(`/palettes/new/?limit=${ limit }&page=${ page }`)
+            .then(res => res.json())
+            .then(data => {
+                if(data.length < limit) setFetchPalettes(false);
+                setPalettes(palettes => [...palettes, ...data]);
+            });
+        }
     }, [page])
+
+    const handleScroll = () => {
+        if((window.scrollY + document.body.clientHeight) >= document.body.scrollHeight)
+            setPage(page => page + 1);
+    }
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
         <div className="New" style={{ maxWidth: "1200px", marginLeft: "auto", marginRight: "auto" }}>
